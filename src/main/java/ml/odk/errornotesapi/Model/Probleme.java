@@ -6,13 +6,17 @@ import javax.persistence.*;
 
 @Entity
 @Data
+@Table(name = "probleme")
 public class Probleme {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_probleme")
     private Long id_probleme;
-    private  String titre;
+    @Column(name = "titre", length = 50)
+    private String titre;
+    @Column(name = "description", length = 225)
     private String description;
+    @Column(name = "technologie",length = 30)
     private String technologie;
 
 }
