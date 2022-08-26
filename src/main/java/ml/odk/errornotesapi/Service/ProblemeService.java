@@ -1,22 +1,23 @@
 package ml.odk.errornotesapi.Service;
 
+import ml.odk.errornotesapi.Model.Compte;
 import ml.odk.errornotesapi.Model.Probleme;
 
 import java.util.List;
 
 public interface ProblemeService {
 
-    //Pour créer un probleme
-    Probleme creerProbleme(Probleme probleme);
+    //Création d'un problème
+    Probleme creerprobleme(Probleme probleme);
+    //modification des informations d'un problème
 
-    //Pour modifier un probleme
-    Probleme modifierProbleme(Probleme probleme);
+    Probleme modifier(Long id, Probleme probleme);
 
-    //Pour chercher un probleme
+    // Afficher la liste des problèmes
+    List<Probleme> lire();
+
+    //Rechercher par mot clé
     Probleme rechercher(Probleme probleme);
-
-    //Pour supprimer un probleme
-    Probleme supprimerProbleme(Probleme probleme);
-    public List<Probleme> problemes(String mot_cle);
-
+    //Suppression d'un problème
+    String supprimer(Long id);
 }
