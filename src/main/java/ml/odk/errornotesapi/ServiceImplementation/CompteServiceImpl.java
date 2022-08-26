@@ -2,9 +2,11 @@ package ml.odk.errornotesapi.ServiceImplementation;
 
 import ml.odk.errornotesapi.Model.Compte;
 import ml.odk.errornotesapi.Service.CompteService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CompteServiceImpl implements CompteService {
     @Override
     public Compte connecter(Compte compte) {
