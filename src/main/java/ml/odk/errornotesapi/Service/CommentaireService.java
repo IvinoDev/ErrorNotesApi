@@ -12,9 +12,9 @@ public interface CommentaireService {
     //Création d'un commentaire
     Commentaire creercommentaire(Commentaire commentaire);
     //modification  d'un commentaire
-    Commentaire modifier(Commentaire commentaire);
+    Commentaire modifier( Long id ,Commentaire commentaire);
     // Afficher la liste des utilisateurs
     List<Commentaire> lire();
     //Suppression d'un commentaire
-    Commentaire supprimer(Commentaire commentaire);
+    String supprimer( Long id, Commentaire commentaire);
 }

@@ -17,7 +17,10 @@ public interface ProblemeService {
     List<Probleme> lire();
 
     //Rechercher par mot clé
-    Probleme rechercher(Probleme probleme);
+
+    Object recherche(String mot_cle);
+
+    //Probleme rechercher(Probleme probleme);
     //Suppression d'un problème
     String supprimer(Long id);
 }
