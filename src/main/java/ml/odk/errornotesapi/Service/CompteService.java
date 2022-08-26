@@ -18,7 +18,10 @@ public interface CompteService {
     Compte modifier(Compte compte);
     // Afficher la liste des utilisateurs
     List<Compte> lire();
+    //Rechercher par mot clé
+    Compte rechercher(Compte compte);
     //Suppression d'un user
     Compte supprimer(Compte compte);
+
 
 }
