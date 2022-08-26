@@ -1,4 +1,24 @@
 package ml.odk.errornotesapi.Service;
 
+import ml.odk.errornotesapi.Model.Compte;
+
+import java.util.List;
+
 public interface CompteService {
+
+
+    //connexion à un compte
+    Compte connecter(Compte compte);
+    //deconnexion à un compte
+    Compte deconnecter(Compte compte);
+
+    //Création d'un utilisateur
+    Compte creeruser(Compte compte);
+    //modification des informations d'un user
+    Compte modifier(Compte compte);
+    // Afficher la liste des utilisateurs
+    List<Compte> lire();
+    //Suppression d'un user
+    Compte supprimer(Compte compte);
+
 }
