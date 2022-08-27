@@ -2,13 +2,18 @@ package ml.odk.errornotesapi.ServiceImplementation;
 
 import lombok.Data;
 import ml.odk.errornotesapi.Model.Compte;
+import ml.odk.errornotesapi.Repository.CompteRepository;
 import ml.odk.errornotesapi.Service.CompteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 @Data
 public class CompteServiceImpl implements CompteService {
+    @Autowired
+    CompteRepository cr;
+
     @Override
     public Compte connecter(Compte compte) {
         return null;
