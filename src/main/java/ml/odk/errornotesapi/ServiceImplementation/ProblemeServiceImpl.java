@@ -39,6 +39,7 @@ public class ProblemeServiceImpl implements ProblemeService {
     public Object recherche(String mot_cle) {
         if(mot_cle != null){
             List<Probleme> resultat = pr.findAll(mot_cle);
+            System.out.println(resultat);
             if(resultat.size() != 0) {
                 return resultat;
             } else {

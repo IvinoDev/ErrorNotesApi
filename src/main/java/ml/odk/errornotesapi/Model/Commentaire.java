@@ -17,6 +17,5 @@ public class Commentaire {
     private String message;
     @Column(name = "date")
     private String date;
-    private String ree;
 
 }

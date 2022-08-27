@@ -37,8 +37,9 @@ public class SolutionServiceImpl implements SolutionService {
     } */
 
     @Override
-    public String supprimersolution(Long id) {
-        return null;
+    public String supprimersolution(Long id_solution) {
+        sr.deleteById(id_solution);
+        return "Solution supprimée avec succès";
     }
 
 }
