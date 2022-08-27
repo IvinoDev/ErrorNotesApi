@@ -36,9 +36,20 @@ public class ProblemeServiceImpl implements ProblemeService {
     }
 
     @Override
-    public Probleme rechercher(Probleme probleme) {
-        return null;
+    public Object recherche(String mot_cle) {
+        if(mot_cle != null){
+            List<Probleme> resultat = pr.findAll(mot_cle);
+            if(resultat.size() != 0) {
+                return resultat;
+            } else {
+                return "Aucun résultat trouvé.";
+            }
+        }
+        return pr.findAll() ;
+
     }
+
+
 
     @Override
     public String supprimer(Long id) {
