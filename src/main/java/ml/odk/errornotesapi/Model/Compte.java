@@ -21,7 +21,14 @@ public class Compte {
     @Column(name = "email",length = 50)
     private String email;
     @Column(name = "profile",length = 25)
-    private String profile;
+    @Enumerated(EnumType.STRING)
+    private Type type;
+
+    /*@OneToMany(mappedBy = "compte")
+    List<Probleme> problemes;
+
+    @OneToMany(mappedBy = "compte")
+    List<Commentaire> commentaires;*/
 
 
 }

@@ -1,6 +1,7 @@
 package ml.odk.errornotesapi.ServiceImplementation;
 
 import lombok.Data;
+import ml.odk.errornotesapi.Model.Etat;
 import ml.odk.errornotesapi.Model.Probleme;
 import ml.odk.errornotesapi.Repository.ProblemeRepository;
 import ml.odk.errornotesapi.Service.ProblemeService;
@@ -17,6 +18,18 @@ public class ProblemeServiceImpl implements ProblemeService {
     public Probleme creerprobleme(Probleme probleme) {
         return pr.save(probleme);
     }
+
+    /*@Override
+    public String creerprobleme(Probleme probleme, Long id_probleme) {
+        Optional<Probleme> problemeOptional=pr.findById_probleme(probleme.getId_probleme());
+        if(problemeOptional.isPresent()){
+            return null;
+        }
+        Probleme probleme=this.problemeRepository.save(probleme);
+        probleme.setEtat(Etat.initie);
+        this.pr.save(probleme);
+        return "Problème crée avec succés.";
+    }*/
 
     @Override
     public Probleme modifier(Long id, Probleme probleme) {
@@ -53,8 +66,8 @@ public class ProblemeServiceImpl implements ProblemeService {
 
 
     @Override
-    public String supprimer(Long id) {
-        pr.deleteById(id);
+    public String supprimer(Long id_probleme) {
+        pr.deleteById(id_probleme);
         return "Problème Supprimé";
     }
 

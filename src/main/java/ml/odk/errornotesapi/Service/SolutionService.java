@@ -5,10 +5,10 @@ import ml.odk.errornotesapi.Model.Solution;
 
 public interface SolutionService {
     Solution creersolution(Solution solution);
-    Solution modifiersolution( Long id, Solution solution);
+    Solution modifiersolution(Long id_solution, Solution solution);
     //Rechercher par mot clé
 
     /*Solution rechercher(Solution solution);*/
-
-    String supprimersolution(Long id);
+    //Supprimer une solution
+    String supprimersolution(Long id_solution);
 }

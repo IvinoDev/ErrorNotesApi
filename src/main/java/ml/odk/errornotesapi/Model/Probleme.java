@@ -18,5 +18,13 @@ public class Probleme {
     private String description;
     @Column(name = "technologie",length = 30)
     private String technologie;
+    @Column(name = "etat",length = 30)
+    @Enumerated(EnumType.STRING)
+    private Etat etat;
 
+    /* @OneToOne
+    private Solution solution;
+
+    @ManyToOne
+    private Compte compte;*/
 }

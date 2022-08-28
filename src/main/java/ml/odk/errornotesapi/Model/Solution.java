@@ -3,6 +3,7 @@ package ml.odk.errornotesapi.Model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,6 +22,12 @@ public class Solution {
     @Column(name = "methodologie",length = 225)
     private String methodologie;
 
+
+    /*@OneToOne
+    private Probleme problemes;
+
+    @OneToMany(mappedBy = "solution")
+    List<Commentaire> commentaires;*/
 
 
 }

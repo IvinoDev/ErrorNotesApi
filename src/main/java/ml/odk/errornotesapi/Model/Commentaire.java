@@ -18,4 +18,10 @@ public class Commentaire {
     @Column(name = "date")
     private String date;
 
+   /* @ManyToOne
+    private Solution solution;
+
+    @ManyToOne
+    private Compte compte;*/
+
 }
