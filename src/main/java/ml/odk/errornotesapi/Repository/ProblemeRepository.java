@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProblemeRepository extends JpaRepository<Probleme,Long> {
@@ -18,5 +19,8 @@ public interface ProblemeRepository extends JpaRepository<Probleme,Long> {
             " OR probleme.technologie LIKE %?1%", nativeQuery = true)
 
     List<Probleme> findAll(String mot_cle);
+    //Optional<Probleme> findById(Long id);
 
+    //Verification de l'existance d'un problème à travers le titre
+    Optional<Probleme> findByTitre(String titre);
 }

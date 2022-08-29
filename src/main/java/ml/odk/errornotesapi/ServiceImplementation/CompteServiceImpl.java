@@ -26,13 +26,23 @@ public class CompteServiceImpl implements CompteService {
 
     @Override
     public Compte creeruser(Compte compte) {
-        return null;
+        return cr.save(compte);
     }
 
     @Override
-    public Compte modifier(Compte compte) {
-        return null;
+    public Compte modifier(Long id, Compte compte) {
+        return cr.findById(id)
+                .map(c->{
+                    c.setNom(compte.getNom());
+                    c.setPrenom(compte.getPrenom());
+                    c.setEmail(compte.getEmail());
+                    c.setPhone(compte.getPhone());
+                    c.setType(compte.getType());
+                    return cr.save(c);
+
+                }).orElseThrow(() -> new RuntimeException("Modification interdite"));
     }
+
 
     @Override
     public List<Compte> lire() {
@@ -45,7 +55,15 @@ public class CompteServiceImpl implements CompteService {
     }
 
     @Override
-    public Compte supprimer(Compte compte) {
-        return null;
+    public String supprimer(Long id) {
+        cr.deleteById(id);
+        return "Compte supprimé avec succès";
     }
+
+    @Override
+    public Compte getCompteByEmail(String email) {
+        return cr.findByEmail(email);
+    }
+
+
 }

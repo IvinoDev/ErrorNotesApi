@@ -11,7 +11,7 @@ public class Probleme {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_probleme")
-    private Long id_probleme;
+    private Long id;
     @Column(name = "titre", length = 50)
     private String titre;
     @Column(name = "description", length = 225)
@@ -22,6 +22,7 @@ public class Probleme {
     @Enumerated(EnumType.STRING)
     private Etat etat;
 
+    //le contraire
     /* @OneToOne
     private Solution solution;
 

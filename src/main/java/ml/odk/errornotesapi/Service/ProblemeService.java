@@ -7,8 +7,8 @@ import java.util.List;
 public interface ProblemeService {
 
     //Création d'un problème
-    //String creerprobleme(Probleme probleme, Long id_probleme);
-    Probleme creerprobleme(Probleme probleme);
+    String creerprobleme(Probleme probleme);
+    //Probleme creerprobleme(Probleme probleme);
     //modification des informations d'un problème
 
     Probleme modifier(Long id_probleme, Probleme probleme);

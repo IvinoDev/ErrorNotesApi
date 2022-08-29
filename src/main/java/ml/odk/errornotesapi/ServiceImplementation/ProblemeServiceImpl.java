@@ -8,28 +8,30 @@ import ml.odk.errornotesapi.Service.ProblemeService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @Data
 public class ProblemeServiceImpl implements ProblemeService {
 
     // pr est le sigle de problemerepository
     private final ProblemeRepository pr;
-    @Override
+    /*@Override
     public Probleme creerprobleme(Probleme probleme) {
         return pr.save(probleme);
-    }
+    }*/
 
-    /*@Override
-    public String creerprobleme(Probleme probleme, Long id_probleme) {
-        Optional<Probleme> problemeOptional=pr.findById_probleme(probleme.getId_probleme());
+    @Override
+    public String creerprobleme(Probleme probleme) {
+        Optional<Probleme> problemeOptional=pr.findByTitre(probleme.getTitre());
         if(problemeOptional.isPresent()){
             return null;
         }
-        Probleme probleme=this.problemeRepository.save(probleme);
+        probleme = this.pr.save(probleme);
         probleme.setEtat(Etat.initie);
         this.pr.save(probleme);
         return "Problème crée avec succés.";
-    }*/
+    }
 
     @Override
     public Probleme modifier(Long id, Probleme probleme) {
