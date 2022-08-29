@@ -35,6 +35,7 @@ public class ProblemeServiceImpl implements ProblemeService {
         return pr.findAll();
     }
 
+    //L'implémentation de la méthode recherche avec les conditions
     @Override
     public Object recherche(String mot_cle) {
         if(mot_cle != null){

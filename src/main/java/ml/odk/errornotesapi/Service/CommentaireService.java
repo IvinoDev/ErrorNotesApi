@@ -16,5 +16,5 @@ public interface CommentaireService {
     // Afficher la liste des utilisateurs
     List<Commentaire> lire();
     //Suppression d'un commentaire
-    String supprimer( Long id, Commentaire commentaire);
+    String supprimer( Long id);
 }

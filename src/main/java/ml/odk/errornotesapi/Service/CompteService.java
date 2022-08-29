@@ -15,13 +15,13 @@ public interface CompteService {
     //Création d'un utilisateur
     Compte creeruser(Compte compte);
     //modification des informations d'un user
-    Compte modifier(Compte compte);
+    Compte modifier( Long id, Compte compte);
     // Afficher la liste des utilisateurs
     List<Compte> lire();
     //Rechercher par mot clé
     Compte rechercher(Compte compte);
     //Suppression d'un user
-    Compte supprimer(Compte compte);
+    String supprimer( Long id);
 
 
 }

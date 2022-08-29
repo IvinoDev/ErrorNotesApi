@@ -7,6 +7,8 @@ import ml.odk.errornotesapi.Service.SolutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Data
 public class SolutionServiceImpl implements SolutionService {
@@ -28,6 +30,11 @@ public class SolutionServiceImpl implements SolutionService {
                     s.setMethodologie(solution.getMethodologie());
                     return sr.save(s);
                 }).orElseThrow(() -> new RuntimeException("Modification interdite."));
+    }
+
+    @Override
+    public List<Solution> lireSolution() {
+        return sr.findAll();
     }
 
 
