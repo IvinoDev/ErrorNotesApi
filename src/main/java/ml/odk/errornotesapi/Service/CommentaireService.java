@@ -18,6 +18,8 @@ public interface CommentaireService {
     //Suppression d'un commentaire
     String supprimer(Long id_commentaire);
 
+    Commentaire addcommentaire (Commentaire commentaire, Long id_solution, Long id_compte);
+
 
     /*Commentaire Creer(Commentaire commentaire);
     List<Commentaire> lister();

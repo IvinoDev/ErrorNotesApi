@@ -3,6 +3,7 @@ package ml.odk.errornotesapi.Model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -18,14 +19,16 @@ public class Probleme {
     private String description;
     @Column(name = "technologie",length = 30)
     private String technologie;
+    @Column(name = "date")
+    private LocalDate date;
     @Column(name = "etat",length = 30)
     @Enumerated(EnumType.STRING)
     private Etat etat;
 
     //le contraire
-    /* @OneToOne
+    @OneToOne
     private Solution solution;
 
     @ManyToOne
-    private Compte compte;*/
+    private Compte compte;
 }

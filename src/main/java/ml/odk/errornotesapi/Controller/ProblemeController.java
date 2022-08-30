@@ -8,6 +8,8 @@ import ml.odk.errornotesapi.Service.ProblemeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Data
 @RequestMapping("/probleme")
@@ -16,17 +18,22 @@ public class ProblemeController {
     ProblemeService ps;
 
     @GetMapping("/recherche/{mot_cle}")
-    Object recherche(@PathVariable String mot_cle) {
+    List<Probleme> recherche(@PathVariable String mot_cle) {
         return ps.recherche(mot_cle);
     }
 
-    @PostMapping("/poster")
+    @PostMapping("/poster/{id_compte}")
+    Probleme ajouter(@RequestBody Probleme probleme, @PathVariable Long id_compte) {
+        return ps.addproblem(probleme, id_compte);
+    }
+
+    /*@PostMapping("/poster")
     String ajouter(@RequestBody Probleme probleme){
         if(this.ps.creerprobleme(probleme) == null){
             return "ce problème existe deja";
         }
         return "problème ajouté avec succès";
-    }
+    } */
 
     /*@PostMapping("/poster")
     String ajouter(@RequestBody Probleme probleme){
@@ -36,22 +43,32 @@ public class ProblemeController {
         return "problème ajouté avec succès";
     }*/
 
+//    @PutMapping("/modifier/{id_probleme}")
+//    Object modifier(@RequestBody Probleme probleme, @PathVariable Long id_probleme){
+//        Compte compt = new Compte();
+//        if (compt.getType() == Type.UserAdmin || compt.getType() == Type.User){
+//            return ps.modifier(id_probleme, probleme);
+//        }
+//        return "Action non autorisée.";
+//    }
+
     @PutMapping("/modifier/{id_probleme}")
-    Object modifier(@RequestBody Probleme probleme, @PathVariable Long id_probleme){
-        Compte compt = new Compte();
-        if (compt.getType() == Type.UserAdmin || compt.getType() == Type.User){
-            return ps.modifier(id_probleme, probleme);
-        }
-        return "Action non autorisée.";
+    Probleme modifier (@RequestBody Probleme probleme, @PathVariable Long id_probleme){
+        return ps.modifier(id_probleme, probleme);
     }
 
-    @DeleteMapping("/supprimer/{id_probleme}")
+    //PS: Ne jamais supprimer ce qu'il y'a dans la BDD en pratique
+    /*@DeleteMapping("/supprimer/{id_probleme}")
     String supprimer(@PathVariable Long id_probleme) {
         Compte compt = new Compte();
         if (compt.getType() == Type.UserAdmin || compt.getType() == Type.User) {
             return ps.supprimer(id_probleme);
         }
         return  "Action non autorisée";
+    }*/
+    @DeleteMapping("/supprimer/{id_probleme}")
+    String supprimer (@PathVariable Long id_probleme) {
+        return ps.supprimer(id_probleme);
     }
 
 }

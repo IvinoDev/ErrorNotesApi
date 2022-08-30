@@ -13,10 +13,15 @@ import org.springframework.web.bind.annotation.*;
 public class CommentaireController {
     @Autowired
     CommentaireService cs;
-    @PostMapping("/ajouter")
+    /*@PostMapping("/ajouter")
     Commentaire ajouter(@RequestBody Commentaire commentaire){
 
-        return cs.creercommentaire(commentaire);
+        //return cs.creercommentaire(commentaire);
+    }*/
+
+    @PostMapping("/ajouter/{id_compte}/{id_solution}")
+    Commentaire ajouter(@RequestBody Commentaire commentaire, @PathVariable Long id_compte, @PathVariable Long id_solution){
+        return cs.addcommentaire(commentaire, id_compte, id_solution);
     }
 
     @PutMapping("/modifier/{id_commentaire}")

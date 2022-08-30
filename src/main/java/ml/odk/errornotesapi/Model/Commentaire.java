@@ -3,6 +3,8 @@ package ml.odk.errornotesapi.Model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -15,13 +17,18 @@ public class Commentaire {
     private Long id_commentaire;
     @Column(name = "message")
     private String message;
-    @Column(name = "date")
-    private String date;
+    private LocalDate date;
+    private LocalTime heure;
 
-   /* @ManyToOne
+    // Ancienne disposition au 29
+    @ManyToOne
     private Solution solution;
 
-    @ManyToOne
+    /*@ManyToOne
     private Compte compte;*/
+
+    //Disposition Amagarai
+    @OneToOne
+    private Compte compte;
 
 }

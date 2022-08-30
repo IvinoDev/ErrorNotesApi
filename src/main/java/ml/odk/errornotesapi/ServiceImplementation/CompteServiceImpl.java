@@ -2,6 +2,7 @@ package ml.odk.errornotesapi.ServiceImplementation;
 
 import lombok.Data;
 import ml.odk.errornotesapi.Model.Compte;
+import ml.odk.errornotesapi.Model.Type;
 import ml.odk.errornotesapi.Repository.CompteRepository;
 import ml.odk.errornotesapi.Service.CompteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class CompteServiceImpl implements CompteService {
 
     @Override
     public Compte creeruser(Compte compte) {
+        //fonction pour préciser que les personnes qui s'incrivent sont des users
+        compte.setType(Type.User);
         return cr.save(compte);
     }
 
@@ -37,7 +40,8 @@ public class CompteServiceImpl implements CompteService {
                     c.setPrenom(compte.getPrenom());
                     c.setEmail(compte.getEmail());
                     c.setPhone(compte.getPhone());
-                    c.setType(compte.getType());
+                    //Plus necessaire car automatique
+                    //c.setType(compte.getType());
                     return cr.save(c);
 
                 }).orElseThrow(() -> new RuntimeException("Modification interdite"));

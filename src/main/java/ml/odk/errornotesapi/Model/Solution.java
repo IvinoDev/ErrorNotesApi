@@ -3,6 +3,8 @@ package ml.odk.errornotesapi.Model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,13 +23,18 @@ public class Solution {
     private String ressource;
     @Column(name = "methodologie",length = 225)
     private String methodologie;
+    @Column(name = "date")
+    private LocalDate date;
 
 
-    /*@OneToOne
+    @OneToOne
     private Probleme problemes;
 
+
     @OneToMany(mappedBy = "solution")
-    List<Commentaire> commentaires;*/
+    // Changement en arraylist pour gérer le cas où il n'y aurait pas de commentaires
+            // s'il y'a une liste vide, pour éviter null
+    List<Commentaire> commentaires = new ArrayList<>();
 
 
 }

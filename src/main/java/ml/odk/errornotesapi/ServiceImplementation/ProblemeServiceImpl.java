@@ -1,12 +1,16 @@
 package ml.odk.errornotesapi.ServiceImplementation;
 
 import lombok.Data;
+import ml.odk.errornotesapi.Model.Compte;
 import ml.odk.errornotesapi.Model.Etat;
 import ml.odk.errornotesapi.Model.Probleme;
+import ml.odk.errornotesapi.Repository.CompteRepository;
 import ml.odk.errornotesapi.Repository.ProblemeRepository;
 import ml.odk.errornotesapi.Service.ProblemeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +19,9 @@ import java.util.Optional;
 public class ProblemeServiceImpl implements ProblemeService {
 
     // pr est le sigle de problemerepository
+    @Autowired
+    CompteRepository cr;
+    //mieux de faire autowired ici
     private final ProblemeRepository pr;
     /*@Override
     public Probleme creerprobleme(Probleme probleme) {
@@ -51,17 +58,17 @@ public class ProblemeServiceImpl implements ProblemeService {
     }
 
     @Override
-    public Object recherche(String mot_cle) {
+    public List<Probleme> recherche(String mot_cle) {
+        List<Probleme> resultat = pr.findAll(mot_cle);
         if(mot_cle != null){
-            List<Probleme> resultat = pr.findAll(mot_cle);
             System.out.println(resultat);
             if(resultat.size() != 0) {
-                return resultat;
+                System.out.println("liste vide");
             } else {
-                return "Aucun résultat trouvé.";
+                System.out.println("aucun probleme trouvé ");
             }
         }
-        return pr.findAll() ;
+        return resultat;
 
     }
 
@@ -70,7 +77,21 @@ public class ProblemeServiceImpl implements ProblemeService {
     @Override
     public String supprimer(Long id_probleme) {
         pr.deleteById(id_probleme);
-        return "Problème Supprimé";
+        return "Problème Supprimé avec succès";
+    }
+
+    //Méthode Amagarai
+    @Override
+    public Probleme addproblem(Probleme probleme, Long id) {
+        //Permet de recupérer l'id de la personne connectée et de la retourner (sur le GUI)
+        Compte compte = cr.findById(id).get();
+        //Pour que l'utilsateur présentement connecté crée le problème
+        probleme.setCompte(compte);
+        //Pour enregistrer la date à laquelle le problème a été crée
+        probleme.setDate(LocalDate.now());
+        //pour que l'état soit initial à la création du pb
+        probleme.setEtat(Etat.initie);
+        return pr.save(probleme);
     }
 
 

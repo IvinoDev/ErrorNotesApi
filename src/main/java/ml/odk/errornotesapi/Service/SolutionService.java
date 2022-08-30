@@ -11,4 +11,6 @@ public interface SolutionService {
     /*Solution rechercher(Solution solution);*/
     //Supprimer une solution
     String supprimersolution(Long id_solution);
+
+    Solution addsolution (Solution solution, Long id);
 }

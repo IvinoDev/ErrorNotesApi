@@ -24,7 +24,7 @@ public class CompteController {
     /**
      * Connexion utilisateur
      */
-    @RequestMapping("/connexion/{email}/{password}")
+    @PostMapping("/connexion/{email}/{password}")
     public String login(@PathVariable(value = "email") String email, @PathVariable(value = "password") String password) {
         //String email = request.getParameter("email");
         //String password = request.getParameter("password");

@@ -13,9 +13,9 @@ public class SolutionController {
     @Autowired
     SolutionService solutionService;
 
-    @PostMapping("/ajouter")
-    Solution ajouter(@RequestBody Solution solution){
-        return solutionService.creersolution(solution);
+    @PostMapping("/ajouter/{id_probleme}")
+    Solution ajouter(@RequestBody Solution solution, @PathVariable Long id_probleme){
+        return solutionService.addsolution(solution, id_probleme);
     }
 
     @PutMapping("/modifier/{id_solution}")
