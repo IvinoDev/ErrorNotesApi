@@ -1,14 +1,11 @@
-package ml.odk.errornotesapi.Controller;
+/*package ml.odk.errornotesapi.Controller;
 
 import lombok.Data;
 import ml.odk.errornotesapi.Message.ReponseMessage;
-import ml.odk.errornotesapi.Model.Etat;
 import ml.odk.errornotesapi.Service.EtatService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
+import org.springframework.web.bind.annotation.*;*/
+/*
 @RestController
 @Data
 @RequestMapping("/etat")
@@ -28,7 +25,7 @@ public class EtatController {
     public List<Etat> lire(){
         return etatService.lire();
     }*/
-    @PutMapping("/modifier/{id}")
+    /*@PutMapping("/modifier/{id}")
     public Etat modifier(@PathVariable Long id, @RequestBody Etat etat){
         return etatService.modifierEtat(id, etat);
     }
@@ -37,4 +34,4 @@ public class EtatController {
     public String supprimer (@PathVariable Long id){
         return etatService.supprimerEtat(id);
     }
-}
+}*/

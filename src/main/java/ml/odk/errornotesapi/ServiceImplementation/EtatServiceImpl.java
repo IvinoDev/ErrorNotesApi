@@ -1,12 +1,11 @@
-package ml.odk.errornotesapi.ServiceImplementation;
+/*package ml.odk.errornotesapi.ServiceImplementation;
 
 import lombok.Data;
-import ml.odk.errornotesapi.Model.Etat;
 import ml.odk.errornotesapi.Repository.EtatRepository;
 import ml.odk.errornotesapi.Service.EtatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import org.springframework.stereotype.Service;*/
+/*
 @Service
 @Data
 public class EtatServiceImpl implements EtatService {
@@ -35,3 +34,4 @@ public class EtatServiceImpl implements EtatService {
         return "Etat supprimée avec Succès";
     }
 }
+*/
