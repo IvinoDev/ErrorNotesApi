@@ -60,7 +60,7 @@ public class CommentaireServiceImpl implements CommentaireService {
 
     @Override
     public Commentaire addcommentaire(Commentaire commentaire, Long id_solution, Long id_compte) {
-        //
+        //Récupération du compte de la solution avec leurs Id(s)
         Compte compte = compteRepository.findById(id_compte).get();
         Solution solution = solutionRepository.findById(id_solution).get();
         //Attribution du compte qui crée le commentaire, de sa date et de son l'heure
@@ -75,13 +75,11 @@ public class CommentaireServiceImpl implements CommentaireService {
         liste.add(commentaire);
         //Ajout du nouveau commentaire avec les anciens
         solution.setCommentaires(liste);
+
+        //Enregistrement du nouvel état
+        problemeRepository.save(solution.getProblemes());
         //Enregistrement de la solution avec le nouveau commentaire
         solutionRepository.save(solution);
-        //Changement de l'état du pb en résolu lors qd la solution est créee
-        //récup du pb puis changement de son état
-        solution.getProblemes().setEtat(Etat.resolu);
-        //Enregistreement du nouvel état
-        problemeRepository.save(solution.getProblemes());
         //affichage du commentaire
         return commentaire;
     }

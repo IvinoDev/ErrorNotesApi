@@ -57,6 +57,12 @@ public class ProblemeController {
         return ps.modifier(id_probleme, probleme);
     }
 
+    //Modifier manuellement l'état d'un pb existant:
+    @PutMapping("/modifier_etat/{id_probleme}")
+    Probleme modifier(@PathVariable Long id_probleme, @RequestBody Probleme probleme){
+        return ps.modifierEtat(id_probleme, probleme);
+    }
+
     //PS: Ne jamais supprimer ce qu'il y'a dans la BDD en pratique
     /*@DeleteMapping("/supprimer/{id_probleme}")
     String supprimer(@PathVariable Long id_probleme) {

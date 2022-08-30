@@ -43,20 +43,19 @@ public class CompteServiceImpl implements CompteService {
                     //Plus necessaire car automatique
                     //c.setType(compte.getType());
                     return cr.save(c);
-
                 }).orElseThrow(() -> new RuntimeException("Modification interdite"));
     }
 
 
     @Override
     public List<Compte> lire() {
-        return null;
+        return cr.findAll();
     }
 
-    @Override
+    /*@Override
     public Compte rechercher(Compte compte) {
-        return null;
-    }
+
+    }*/
 
     @Override
     public String supprimer(Long id) {

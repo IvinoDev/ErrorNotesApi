@@ -1,10 +1,12 @@
 package ml.odk.errornotesapi.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -15,22 +17,23 @@ public class Solution {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_solution")
     private Long id_solution;
-    @Column(name = "description",length = 225)
+    @Column(nullable = false,length = 225)
     private String description;
-    @Column(name = "estimation",length = 50)
+    //@Column(nullable = false ,length = 50)
     private String estimation;
-    @Column(name = "ressource",length = 150)
+    @Column(nullable = false,length = 150)
     private String ressource;
-    @Column(name = "methodologie",length = 225)
+    @Column(nullable = false,length = 225)
     private String methodologie;
-    @Column(name = "date")
-    private LocalDate date;
+    //private LocalDate date;
+    private Date date;
+
 
 
     @OneToOne
     private Probleme problemes;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "solution")
     // Changement en arraylist pour gérer le cas où il n'y aurait pas de commentaires
             // s'il y'a une liste vide, pour éviter null

@@ -16,15 +16,15 @@ public class Compte {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_compte")
     private Long id_compte;
-    @Column(name = "nom",length = 25)
+    @Column(length = 25, nullable = false)
     private String nom;
-    @Column(name = "prenom",length = 25)
+    @Column(length = 25, nullable = false)
     private String prenom;
-    @Column(name = "telephone",length = 30)
+    @Column(length = 30, unique = true, nullable = false)
     private String phone;
-    @Column(name = "email",length = 50, unique = true, nullable = false)
+    @Column(length = 50, unique = true, nullable = false)
     private String email;
-    @Column(name = "password",length = 30, unique = true, nullable = false)
+    @Column(length = 30, unique = true, nullable = false)
     private String password;
     @Column(name = "profile",length = 25)
     @Enumerated(EnumType.STRING)

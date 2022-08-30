@@ -14,8 +14,13 @@ public class SolutionController {
     SolutionService solutionService;
 
     @PostMapping("/ajouter/{id_probleme}")
-    Solution ajouter(@RequestBody Solution solution, @PathVariable Long id_probleme){
-        return solutionService.addsolution(solution, id_probleme);
+    Object ajouter(@RequestBody Solution solution, @PathVariable Long id_probleme){
+        Solution s=solutionService.verification(id_probleme);
+        if (s != null) {
+            return "Solution déjà existante";
+        } else {
+            return solutionService.addsolution(solution, id_probleme);
+        }
     }
 
     @PutMapping("/modifier/{id_solution}")

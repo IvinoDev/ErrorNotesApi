@@ -25,4 +25,5 @@ public interface ProblemeService {
 
     Probleme addproblem (Probleme probleme, Long id);
 
+    Probleme modifierEtat(Long id_probleme, Probleme probleme);
 }

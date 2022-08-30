@@ -4,6 +4,7 @@ import lombok.Data;
 import ml.odk.errornotesapi.Model.Compte;
 import ml.odk.errornotesapi.Model.Etat;
 import ml.odk.errornotesapi.Model.Probleme;
+import ml.odk.errornotesapi.Model.Type;
 import ml.odk.errornotesapi.Repository.CompteRepository;
 import ml.odk.errornotesapi.Repository.ProblemeRepository;
 import ml.odk.errornotesapi.Service.ProblemeService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +34,7 @@ public class ProblemeServiceImpl implements ProblemeService {
     public String creerprobleme(Probleme probleme) {
         Optional<Probleme> problemeOptional=pr.findByTitre(probleme.getTitre());
         if(problemeOptional.isPresent()){
-            return null;
+            return "Le problème existe déjà";
         }
         probleme = this.pr.save(probleme);
         probleme.setEtat(Etat.initie);
@@ -80,15 +82,26 @@ public class ProblemeServiceImpl implements ProblemeService {
         return "Problème Supprimé avec succès";
     }
 
-    //Méthode Amagarai
+    @Override
+    public Probleme modifierEtat(Long id_probleme, Probleme probleme) {
+        Probleme proo = new Probleme();
+
+        return pr.findById(id_probleme).map(p->{
+            p.setEtat(probleme.getEtat());
+            return pr.save(p);
+        }).orElseThrow(()->new RuntimeException("Vous ne pouvez pas changer l'état."));
+
+    }
+
+    //Méthode A
     @Override
     public Probleme addproblem(Probleme probleme, Long id) {
-        //Permet de recupérer l'id de la personne connectée et de la retourner (sur le GUI)
+        //Permet de recupérer l'id de la personne connectée et de la retourner (sur le GUI / interface)
         Compte compte = cr.findById(id).get();
         //Pour que l'utilsateur présentement connecté crée le problème
         probleme.setCompte(compte);
         //Pour enregistrer la date à laquelle le problème a été crée
-        probleme.setDate(LocalDate.now());
+        probleme.setDate(new Date());
         //pour que l'état soit initial à la création du pb
         probleme.setEtat(Etat.initie);
         return pr.save(probleme);

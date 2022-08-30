@@ -1,6 +1,7 @@
 package ml.odk.errornotesapi.Service;
 
 import ml.odk.errornotesapi.Model.Compte;
+import ml.odk.errornotesapi.Model.Probleme;
 import ml.odk.errornotesapi.Model.Solution;
 
 public interface SolutionService {
@@ -13,4 +14,6 @@ public interface SolutionService {
     String supprimersolution(Long id_solution);
 
     Solution addsolution (Solution solution, Long id);
+
+    Solution verification (Long id);
 }

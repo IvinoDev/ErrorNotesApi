@@ -51,6 +51,15 @@ public class CompteController {
         }
     }
 
+    /**
+     * Déconnexion utilisateur
+     */
+
+    @PostMapping("/deconnexion/{id_compte}")
+    public String login(@PathVariable(value = "id_compte") Long id){
+        return "Déconnexion avec succès";
+    }
+
     @PostMapping("/creer")
     public Compte creer (@RequestBody Compte compte) {
         return cs.creeruser(compte);

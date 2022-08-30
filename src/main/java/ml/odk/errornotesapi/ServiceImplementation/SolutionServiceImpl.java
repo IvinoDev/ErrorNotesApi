@@ -1,6 +1,7 @@
 package ml.odk.errornotesapi.ServiceImplementation;
 
 import lombok.Data;
+import ml.odk.errornotesapi.Model.Etat;
 import ml.odk.errornotesapi.Model.Probleme;
 import ml.odk.errornotesapi.Model.Solution;
 import ml.odk.errornotesapi.Repository.ProblemeRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Service
 @Data
@@ -52,24 +54,101 @@ public class SolutionServiceImpl implements SolutionService {
     }
 
 
-    //Méthode Amagarai toujours
+    @Override
+    public Solution verification(Long id) {
+
+        Probleme probleme = pr.findById(id).get();
+
+        return sr.findByProblemes(probleme);
+    }
+
+    //Méthode A
     @Override
     public Solution addsolution(Solution solution, Long id) {
         //Récupération du pb à l'aide de son id
         Probleme probleme = pr.findById(id).get(); //get permet de retourner le pb correspondant et find le trouver
+
+        //Changement de l'état du pb en résolu lors qd la solution est créee
+        //récup du pb puis changement de son état
+        probleme.setEtat(Etat.resolu);
+        //Ancienne méthode: solution.getProblemes().setEtat(Etat.resolu);
+        //Sauvegarde du pb avec le nouvel Etat
+        pr.save(probleme);
         //Assigner le pb récupéré ou lier ce pb à la solution qui va être postée
         solution.setProblemes(probleme);
-        //Ajout de la date à laquelle la solution a été posté
-        solution.setDate(LocalDate.now());
+        //Ajout de la date à laquelle la solution a été postée
+        solution.setDate(new Date());
+        //solution.setDate(LocalDate.now());
         //Début méthode pour calculer le temps entre la date du pb et la date de la solution
-        //puis la stocker dans l'attribut estimation, au lieu d'avoir un string pour cela
+        //puis la stocker dans l'attribut estimation, au lieu d'écrire un string pour cela
         //plus besoin de le spécifier car automatique
-        LocalDate date = LocalDate.now();
-        LocalDate datepb = solution.getProblemes().getDate();
-        Duration difference = Duration.between(datepb.atStartOfDay(), date.atStartOfDay());
-        solution.setEstimation("" + difference);
+        /*LocalDate date = LocalDate.now();
+        LocalDate datepb = solution.getProblemes().getDate();*/
+        //Methode B
+        Date date = new Date();
+        Date datepb = probleme.getDate();
+        //long l= (date.getTime() - datepb.getTime())/(1000 * 60);
+
+        //Date datepb = solution.getProblemes().getDate();
 
 
+        //Nous alons calculer le temps consacrer
+        final long  minute = 1000 * 60;
+        final long heure = minute * 60;
+        final long jour = heure * 24;
+        final long annee = jour * 365;
+
+           long l = 0;
+
+
+           long dateannee = (date.getTime() - datepb.getTime())/annee;
+           long datemois = (date.getTime() - datepb.getTime())/jour/30;
+           long datejours = (date.getTime() - datepb.getTime())/jour;
+           long dateheure = (date.getTime() - datepb.getTime())/heure;
+           long dateminute = (date.getTime() - datepb.getTime())/(heure/60);
+           //Pour vérifier au niveau de la console
+            System.err.println(l);
+            System.err.println(dateminute);
+            System.err.println(minute);
+            System.err.println(annee);
+        System.err.println(date.getTime());
+        System.err.println(datepb.getTime());
+
+
+        if(dateannee > 0  ){
+               l=dateannee;
+           }else{
+               if (datemois > 0){
+                   l=datemois;
+               }else{
+                   if (datejours > 0){
+                       l=datejours;
+                   }else{
+                       if (dateheure > 0){
+                           l=dateheure;
+                       }else{
+                           if (dateminute > 0){
+                               l=dateminute;
+                           }else{
+                               System.err.println("Estimation impossible");
+                           }
+                       }
+                   }
+               }
+           }
+
+        solution.setEstimation(l +" minutes");
+
+
+
+
+
+        //date.get
+        //Duration difference = Duration.between(datepb.atStartOfDay(), date.atStartOfDay());
+        //en suivant la logique
+        //Duration difference = Duration.between(datepb, date);
+        //difference.toString();
+        //solution.setEstimation("" + difference);
         //sauvegarde de la solution
         return sr.save(solution);
     }

@@ -1,9 +1,11 @@
 package ml.odk.errornotesapi.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Data
@@ -13,21 +15,21 @@ public class Probleme {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_probleme")
     private Long id;
-    @Column(name = "titre", length = 50)
+    @Column(nullable = false, length = 50, unique = true)
     private String titre;
-    @Column(name = "description", length = 225)
+    @Column(nullable = false, length = 225)
     private String description;
-    @Column(name = "technologie",length = 30)
+    @Column(nullable = false , length = 30)
     private String technologie;
-    @Column(name = "date")
-    private LocalDate date;
-    @Column(name = "etat",length = 30)
+    //private LocalDate date;
+    private Date date;
     @Enumerated(EnumType.STRING)
     private Etat etat;
 
-    //le contraire
+
+    /*@JsonIgnore
     @OneToOne
-    private Solution solution;
+    private Solution solution;*/
 
     @ManyToOne
     private Compte compte;

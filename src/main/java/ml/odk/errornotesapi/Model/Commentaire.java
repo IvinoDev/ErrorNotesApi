@@ -13,22 +13,26 @@ import java.util.Date;
 public class Commentaire {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_commentaire")
+    @Column(name = "id")
     private Long id_commentaire;
-    @Column(name = "message")
+    @Column(nullable = false)
     private String message;
     private LocalDate date;
     private LocalTime heure;
 
     // Ancienne disposition au 29
     @ManyToOne
+    @JoinColumn(name = "id_solution")
     private Solution solution;
 
     /*@ManyToOne
     private Compte compte;*/
 
-    //Disposition Amagarai
-    @OneToOne
+    //Disposition du 30
+    /*@OneToOne
+    private Compte compte; */
+    @ManyToOne
+    @JoinColumn(name = "id_compte")
     private Compte compte;
 
 }
