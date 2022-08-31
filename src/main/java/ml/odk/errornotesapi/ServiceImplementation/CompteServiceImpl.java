@@ -49,6 +49,8 @@ public class CompteServiceImpl implements CompteService {
     }
     @Override
     public Compte modifier(Long id, Compte compte) {
+        Compte compteauth =cr.findById(id).get();
+        if (compteauth.getType() == Type.Super || compteauth.getType()==Type.UserAdmin || compteauth.getType()==Type.User){
         return cr.findById(id)
                 .map(c->{
                     c.setNom(compte.getNom());
@@ -59,13 +61,24 @@ public class CompteServiceImpl implements CompteService {
                     //c.setType(compte.getType());
                     return cr.save(c);
                 }).orElseThrow(() -> new RuntimeException("Modification interdite"));
+        } else {
+            System.out.println(" Nous n'avez pas le droit de faire cette action");
+        }
+        return null;
     }
 
 
     @Override
-    public List<Compte> lire() {
-        return cr.findAll();
+    public List<Compte> lire(Long id) {
+        Compte compteafficher =cr.findById(id).get();
+        if (compteafficher.getType() == Type.Super || compteafficher.getType()==Type.UserAdmin){
+            return cr.findAll();
+        }
+        return null;
+
     }
+
+
 
     /*@Override
     public Compte rechercher(Compte compte) {

@@ -21,7 +21,7 @@ public interface CompteService {
     //modification des informations d'un user
     Compte modifier(Long id, Compte compte);
     // Afficher la liste des utilisateurs
-    List<Compte> lire();
+    List<Compte> lire(Long id);
     //Rechercher par mot clé
     //Compte rechercher(Compte compte);
     //Suppression d'un user
