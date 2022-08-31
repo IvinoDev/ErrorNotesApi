@@ -20,6 +20,9 @@ public class Solution {
     private String ressource;
     @Column(name = "methodologie",length = 225)
     private String methodologie;
+    @OneToOne
+    @JoinColumn(name = "id_probleme")
+    private Probleme probleme;
 
 
 }

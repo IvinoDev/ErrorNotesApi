@@ -1,5 +1,7 @@
 package ml.odk.errornotesapi.Controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import ml.odk.errornotesapi.Message.ReponseMessage;
 
@@ -13,15 +15,17 @@ import java.util.List;
 
 @RestController
 @Data
+@Api(value = "Gestion des problèmes")
 @RequestMapping("/probleme")
 public class ProblemeController {
     @Autowired
     ProblemeService ps;
-
+    @ApiOperation(value = "Recherche un probleme")
     @GetMapping("/recherche/{mot_cle}")
         Object recherche(@PathVariable String mot_cle){
             return ps.recherche(mot_cle);
     }
+    @ApiOperation(value = "creer un probleme", notes = "cette methode permet d'enregistrer un problème")
    @PostMapping("/creer")
    public Object creer(@RequestBody Probleme probleme){
        try {
@@ -32,15 +36,18 @@ public class ProblemeController {
 
 
    }
+    @ApiOperation(value = "creer un probleme", notes = "cette methode permet d'enregistrer un problème")
     @GetMapping("/Lire")
     public List<Probleme> lire(){
         return ps.lire();
     }
+    @ApiOperation(value = "modifier un probleme")
     @PutMapping("/modifier/{id}")
     public Probleme modifier(@PathVariable Long id, @RequestBody Probleme probleme){
         return ps.modifier(id, probleme);
     }
 
+    @ApiOperation(value = "supprimer un probleme")
     @DeleteMapping("/supprimer/{id}")
     public String supprimer (@PathVariable Long id){
         return ps.supprimer(id);

@@ -20,8 +20,11 @@ public class Compte {
     private String phone;
     @Column(name = "email",length = 50)
     private String email;
-    @Column(name = "profile",length = 25)
-    private String profile;
+   /* @ManyToOne
+    @JoinColumn(name = "type_id")
+    private Type type;*/
+
+
 
 
 }

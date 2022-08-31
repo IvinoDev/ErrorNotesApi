@@ -55,7 +55,7 @@ public class ProblemeServiceImpl implements ProblemeService {
     @Override
     public String supprimer(Long id) {
         pr.deleteById(id);
-        return "Problème Supprimé";
+        return "Problème Supprimé avec succès";
     }
 
 

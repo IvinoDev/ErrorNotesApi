@@ -18,5 +18,10 @@ public class Commentaire {
     @Column(name = "date")
     private String date;
     private String ree;
-
+@ManyToOne
+@JoinColumn(name = "id_solution")
+private Solution solution;
+@ManyToOne
+@JoinColumn(name = "id_compte")
+private Compte compte;
 }

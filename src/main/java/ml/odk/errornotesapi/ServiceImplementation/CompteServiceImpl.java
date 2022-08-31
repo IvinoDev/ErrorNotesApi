@@ -35,7 +35,7 @@ public class CompteServiceImpl implements CompteService {
                     cp.setPrenom(compte.getPrenom());
                     cp.setPhone(compte.getPhone());
                     cp.setEmail(compte.getEmail());
-                    cp.setProfile(compte.getProfile());
+
                     return cpr.save(cp);
 
                 }).orElseThrow(() -> new RuntimeException("Désole, compte non trouvé"));

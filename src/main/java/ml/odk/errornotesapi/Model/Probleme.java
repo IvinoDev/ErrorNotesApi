@@ -19,4 +19,10 @@ public class Probleme {
     @Column(name = "technologie",length = 30)
     private String technologie;
 
+    @ManyToOne
+    @JoinColumn(name = "id_etat")
+    private Etat etat;
+    @ManyToOne
+    @JoinColumn(name = "id_compte")
+    private  Compte compte;
 }
