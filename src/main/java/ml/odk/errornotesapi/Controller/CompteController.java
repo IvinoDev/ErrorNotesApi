@@ -60,10 +60,17 @@ public class CompteController {
         return "Déconnexion avec succès";
     }
 
-    @PostMapping("/creer")
+    @PostMapping("/creerUser")
     public Compte creer (@RequestBody Compte compte) {
         return cs.creeruser(compte);
     }
+
+    //Pour créer un admin
+    @PostMapping("/creerAdmin/{id}")
+    public Compte creerAdmin (@RequestBody Compte compte, @PathVariable Long id) {
+        return cs.creerAdmin(compte, id);
+    }
+
 
     @PutMapping("/modifier/{id}")
     public Object modifier (@RequestBody Compte compte, @PathVariable(value = "id") Long id) {

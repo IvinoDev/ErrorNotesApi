@@ -5,6 +5,7 @@ import ml.odk.errornotesapi.Model.Compte;
 import ml.odk.errornotesapi.Model.Type;
 import ml.odk.errornotesapi.Repository.CompteRepository;
 import ml.odk.errornotesapi.Service.CompteService;
+import net.bytebuddy.implementation.bind.annotation.Super;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,20 @@ public class CompteServiceImpl implements CompteService {
         return cr.save(compte);
     }
 
+    @Override
+    public Compte creerAdmin(Compte compte, Long id) {
+        //pour tout d'abord récupérer le compte qui crée l'admin via son id
+        Compte compteSuper = cr.findById(id).get();
+        if (compteSuper.getType() == Type.Super){
+            //fonction pour créer des comptes admins
+            compte.setType(Type.UserAdmin);
+            System.out.println("Creation userAdmin Ok");
+            return cr.save(compte);
+        } else {
+            System.out.println("Action impossible");
+            return null;
+        }
+    }
     @Override
     public Compte modifier(Long id, Compte compte) {
         return cr.findById(id)
@@ -68,5 +83,8 @@ public class CompteServiceImpl implements CompteService {
         return cr.findByEmail(email);
     }
 
-
+    @Override
+    public Compte getCompteByEmailAndPassword(String email, String password) {
+        return cr.findByEmailAndPassword(email, password);
+    }
 }
