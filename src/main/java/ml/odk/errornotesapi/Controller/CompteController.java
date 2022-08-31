@@ -30,7 +30,7 @@ public class CompteController {
         //String password = request.getParameter("password");
         System.out.println(email);
         System.out.println(password);
-        Compte compte = cs.getCompteByEmail(email);
+        Compte compte = cs.getCompteByEmailAndPassword(email, password);
 
         if (StringUtils.isEmpty(email) || StringUtils.isEmpty(password) || compte == null) {
             return "e-mail ou mot de passe incorrect.";
@@ -38,17 +38,18 @@ public class CompteController {
 
         //HttpSession session = request.getSession();
         //session.setAttribute("compte", compte);
-        if (compte.getPassword().equals(password)) {
+        //if (compte.getEmail().equals(email) && compte.getPassword().equals(password)) {
+        if (compte != null) {
             if (compte.getType().equals(Type.UserAdmin)) {
                 return "Bienvenue cher Admin";
-            } else {
+            } else if (compte.getType().equals(Type.User)) {
                 return "Bienvenue cher User";
             }
         } else {
-
             //model.put("msg", "Nom d'utilisateur ou mot de passe incorrect.");
-            return "Connexion impossible";
+            return "Vous n'avez pas le droit de vous connecter.";
         }
+        return  null;
     }
 
     /**
@@ -65,7 +66,7 @@ public class CompteController {
         return cs.creeruser(compte);
     }
 
-    //Pour créer un admin
+    //Pour créer un admin (méthode reservée au superAdmin
     @PostMapping("/creerAdmin/{id}")
     public Compte creerAdmin (@RequestBody Compte compte, @PathVariable Long id) {
         return cs.creerAdmin(compte, id);

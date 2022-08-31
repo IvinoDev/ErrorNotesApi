@@ -1,5 +1,6 @@
 package ml.odk.errornotesapi.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Commentaire {
     private LocalTime heure;
 
     // Ancienne disposition au 29
+    @JsonIgnore //Ajouté le 31
     @ManyToOne
     @JoinColumn(name = "id_solution")
     private Solution solution;

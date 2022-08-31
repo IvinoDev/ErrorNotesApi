@@ -7,6 +7,9 @@ import ml.odk.errornotesapi.Repository.CompteRepository;
 import ml.odk.errornotesapi.Service.CompteService;
 import net.bytebuddy.implementation.bind.annotation.Super;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,10 +29,14 @@ public class CompteServiceImpl implements CompteService {
         return null;
     }
 
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
     @Override
     public Compte creeruser(Compte compte) {
         //fonction pour préciser que les personnes qui s'incrivent sont des users
         compte.setType(Type.User);
+        compte.setPassword(passwordEncoder().encode(compte.getPassword()));
         return cr.save(compte);
     }
 
@@ -72,12 +79,25 @@ public class CompteServiceImpl implements CompteService {
 
     }*/
 
+
+    //Ancien deletepb
     @Override
     public String supprimer(Long id) {
         cr.deleteById(id);
         return "Compte supprimé avec succès";
     }
 
+    //nv delete pb
+   /* @Override
+    public String supprimer(Long id, Compte compte) {
+
+        if (compte.getType() == Type.Super || compte.getType() == Type.UserAdmin) {
+            cr.deleteById(id);
+            return "Compte supprimé avec succès";
+        } else {
+            return "Vous n'avez pas ce droit";
+        }
+    } */
     @Override
     public Compte getCompteByEmail(String email) {
         return cr.findByEmail(email);
@@ -85,6 +105,6 @@ public class CompteServiceImpl implements CompteService {
 
     @Override
     public Compte getCompteByEmailAndPassword(String email, String password) {
-        return cr.findByEmailAndPassword(email, password);
+        return cr.findByEmailAndPassword(email, passwordEncoder().encode(password));
     }
 }

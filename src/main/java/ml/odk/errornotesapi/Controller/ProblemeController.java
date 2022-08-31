@@ -51,7 +51,7 @@ public class ProblemeController {
 //        }
 //        return "Action non autorisée.";
 //    }
-
+    //MODIFIER LE PB
     @PutMapping("/modifier/{id_probleme}")
     Probleme modifier (@RequestBody Probleme probleme, @PathVariable Long id_probleme){
         return ps.modifier(id_probleme, probleme);

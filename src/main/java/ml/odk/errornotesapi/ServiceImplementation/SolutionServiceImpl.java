@@ -130,7 +130,7 @@ public class SolutionServiceImpl implements SolutionService {
                            if (dateminute > 0){
                                l=dateminute;
                            }else{
-                               System.err.println("Estimation impossible");
+                               System.err.println("Probleme creer a l'instant, donc estimation egale a 0");
                            }
                        }
                    }
