@@ -42,6 +42,7 @@ public class ProblemeServiceImpl implements ProblemeService {
         return "Problème crée avec succés.";
     }
 
+    // Modification du problème par l'id du compte
     @Override
     public Probleme modifier(Long id_probleme, Long id_compte, Probleme probleme) {
         try {
@@ -80,7 +81,7 @@ public class ProblemeServiceImpl implements ProblemeService {
     public List<Probleme> lire() {
         return pr.findAll();
     }
-
+    //  la méthode pour effectuer une recherche par mot de clé
     @Override
     public List<Probleme> recherche(String mot_cle) {
         List<Probleme> resultat = pr.findAll(mot_cle);
@@ -99,10 +100,22 @@ public class ProblemeServiceImpl implements ProblemeService {
 
 
     @Override
-    public String supprimer(Long id_probleme) {
-        pr.deleteById(id_probleme);
-        return "Problème supprimé avec succès";
+    public String supprimer(Long id_probleme, Long id_compte) {
+        Compte user =cr.findById(id_compte).get();
+        Probleme probleme = pr.findById(id_probleme).get();
+        try {
+            if(user ==probleme.getCompte()) {
+
+                pr.deleteById(id_probleme);
+                return "Problème supprimé avec succès";
+            }else{
+                return "Ce probleme ne vous appartient pas";
+            }
+    }catch (Exception e){
+            return "Erreur impossible de supprimer le probleme";
+        }
     }
+
 
     @Override
     public Probleme modifierEtat(Long id_probleme, Probleme probleme) {

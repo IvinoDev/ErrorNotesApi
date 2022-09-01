@@ -29,6 +29,7 @@ public interface CompteService {
 
     //pour trouver un compte via son mail
     Compte getCompteByEmail(String email);
+    //pour trouver un compte via son mail et password
 
     Compte getCompteByEmailAndPassword(String email, String password);
 }

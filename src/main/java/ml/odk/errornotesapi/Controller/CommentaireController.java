@@ -29,9 +29,9 @@ public class CommentaireController {
         return cs.addcommentaire(commentaire, id_compte, id_solution);
     }
     @ApiOperation(value = " Methode pour modifier un  commentaire")
-    @PutMapping("/modifier/{id_commentaire}")
-    Commentaire modifier(@PathVariable Long id_commentaire, @RequestBody Commentaire commentaire){
-        return cs.modifier(id_commentaire, commentaire);
+    @PutMapping("/modifier/{id_commentaire}/{id_compte}")
+    Commentaire modifier(@PathVariable Long id_commentaire,@PathVariable Long id_compte, @RequestBody Commentaire commentaire){
+        return cs.modifier(id_commentaire,id_compte, commentaire);
     }
     @ApiOperation(value = " Methode pour supprimer un  commentaire")
     @DeleteMapping("/supprimer/{id_Commentaire}")

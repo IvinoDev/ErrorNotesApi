@@ -72,9 +72,9 @@ public class ProblemeController {
         }
         return  "Action non autorisée";
     }*/
-    @DeleteMapping("/supprimer/{id_probleme}")
-    String supprimer (@PathVariable Long id_probleme) {
-        return ps.supprimer(id_probleme);
+    @DeleteMapping("/supprimer/{id_probleme}/{id_compte}")
+    String supprimer (@PathVariable(value = "id_probleme") Long id_probleme, @PathVariable(value = "id_compte") Long id_compte) {
+        return ps.supprimer(id_probleme, id_compte);
     }
 
 }

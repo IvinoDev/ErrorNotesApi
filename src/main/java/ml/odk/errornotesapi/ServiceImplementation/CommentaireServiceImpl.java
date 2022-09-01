@@ -43,13 +43,23 @@ public class CommentaireServiceImpl implements CommentaireService {
     }*/
 
     @Override
-    public Commentaire modifier(Long id_commentaire, Commentaire commentaire) {
-        return cr.findById(id_commentaire)
-                .map(c1 ->{
-                    c1.setMessage(commentaire.getMessage());
-                    c1.setDate(commentaire.getDate());
-                    return cr.save(c1);
-                }).orElseThrow(() -> new RuntimeException("Modification impossible"));
+    public Commentaire modifier(Long id_commentaire,Long id_compte, Commentaire commentaire) {
+       try {
+           Compte user =compteRepository.findById(id_compte).get();
+           Commentaire commentaire1= cr.findById(id_commentaire).get();
+        if (user == commentaire1.getCompte()) {
+            return cr.findById(id_commentaire)
+                    .map(c1 -> {
+                        c1.setMessage(commentaire.getMessage());
+                        c1.setDate(commentaire.getDate());
+                        return cr.save(c1);
+                    }).orElseThrow(() -> new RuntimeException("Modification impossible"));
+        }else {
+            return  null;
+        }
+    }catch (Exception e){
+           return null;
+       }
     }
 
 

@@ -21,7 +21,7 @@ public interface ProblemeService {
 
     //Probleme rechercher(Probleme probleme);
     //Suppression d'un problème
-    String supprimer(Long id_probleme);
+    String supprimer(Long id_probleme, Long id_compte);
 
     Probleme addproblem (Probleme probleme, Long id);
 

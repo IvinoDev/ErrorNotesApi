@@ -12,7 +12,7 @@ public interface CommentaireService {
     //Création d'un commentaire
     Commentaire creercommentaire(Commentaire commentaire);
     //modification  d'un commentaire
-    Commentaire modifier(Long id_commentaire,Commentaire commentaire);
+    Commentaire modifier(Long id_commentaire, Long id_compte, Commentaire commentaire);
     // Afficher la liste des commentaore
     List<Commentaire> lire();
     //Suppression d'un commentaire
