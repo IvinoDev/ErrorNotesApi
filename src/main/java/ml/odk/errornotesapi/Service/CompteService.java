@@ -25,7 +25,7 @@ public interface CompteService {
     //Rechercher par mot clé
     //Compte rechercher(Compte compte);
     //Suppression d'un user
-    String supprimer(Long id);
+    String supprimer(Long id_compte, Long id_compteauth);
 
     //pour trouver un compte via son mail
     Compte getCompteByEmail(String email);
