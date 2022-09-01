@@ -4,6 +4,7 @@ import lombok.Data;
 import ml.odk.errornotesapi.Model.Compte;
 import ml.odk.errornotesapi.Model.Probleme;
 import ml.odk.errornotesapi.Model.Type;
+import ml.odk.errornotesapi.Service.CompteService;
 import ml.odk.errornotesapi.Service.ProblemeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -51,15 +52,15 @@ public class ProblemeController {
 //        }
 //        return "Action non autorisée.";
 //    }
-    //MODIFIER LE PB
-    @PutMapping("/modifier/{id_probleme}")
-    Probleme modifier (@RequestBody Probleme probleme, @PathVariable Long id_probleme){
-        return ps.modifier(id_probleme, probleme);
+    //MODIFIER le problème en fonctionnant de l'id du compte
+    @PutMapping("/modifier/{id_probleme}/{id_compte}")
+    Probleme modifier (@RequestBody Probleme probleme, @PathVariable(value = "id_probleme") Long id_probleme, @PathVariable(value = "id_compte") Long id_compte){
+        return ps.modifier(id_probleme,id_compte, probleme);
     }
 
     //Modifier manuellement l'état d'un pb existant:
     @PutMapping("/modifier_etat/{id_probleme}")
-    Probleme modifier(@PathVariable Long id_probleme, @RequestBody Probleme probleme){
+    Probleme modifierEtat(@PathVariable Long id_probleme, @RequestBody Probleme probleme){
         return ps.modifierEtat(id_probleme, probleme);
     }
 

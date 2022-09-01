@@ -43,16 +43,46 @@ public class ProblemeServiceImpl implements ProblemeService {
     }
 
     @Override
-    public Probleme modifier(Long id, Probleme probleme) {
-        return pr.findById(id)
-                .map(p->{
-            p.setDescription(probleme.getDescription());
-            p.setTitre(probleme.getTitre());
-            p.setTechnologie(probleme.getTechnologie());
-            return pr.save(p);
+    public Probleme modifier(Long id_probleme, Long id_compte, Probleme probleme) {
+        try {
+            Probleme probleme1=pr.findById(id_probleme).get();
+            Compte user=cr.findById(id_compte).get();
+            if(user==probleme1.getCompte()){
+                return pr.findById(id_probleme)
+                        .map(p -> {
+                            p.setDescription(probleme.getDescription());
+                            p.setTitre(probleme.getTitre());
+                            p.setTechnologie(probleme.getTechnologie());
+                            return pr.save(p);
 
-        }).orElseThrow(() -> new RuntimeException("Désole, Probleme non trouvé"));
+                        }).orElseThrow(() -> new RuntimeException("Désole, Probleme non trouvé"));
+
+            }else {
+                return  null;
+            }
+
+
+        }catch (Exception e){
+            return  null;
+        }
+
+
     }
+
+    /*@Override
+    public Probleme modifier(Long id, Probleme probleme) {
+        Probleme probmodif = pr.findById(id).get();
+        if(probmodif.getTitre()) {
+            return pr.findById(id)
+                    .map(p -> {
+                        p.setDescription(probleme.getDescription());
+                        p.setTitre(probleme.getTitre());
+                        p.setTechnologie(probleme.getTechnologie());
+                        return pr.save(p);
+
+                    }).orElseThrow(() -> new RuntimeException("Désole, Probleme non trouvé"));
+        }
+    }*/
 
     @Override
     public List<Probleme> lire() {

@@ -64,8 +64,7 @@ public class CompteServiceImpl implements CompteService {
                     c.setPrenom(compte.getPrenom());
                     c.setEmail(compte.getEmail());
                     c.setPhone(compte.getPhone());
-                    //Plus necessaire car automatique
-                    //c.setType(compte.getType());
+
                     return cr.save(c);
                 }).orElseThrow(() -> new RuntimeException("Modification interdite"));
         } else {
