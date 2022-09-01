@@ -17,24 +17,24 @@ public class Solution {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_solution")
     private Long id_solution;
-    @Column(nullable = false,length = 225)
+    @Column(nullable = false)
     private String description;
     //@Column(nullable = false ,length = 50)
     private String estimation;
-    @Column(nullable = false,length = 150)
+    @Column(nullable = false)
     private String ressource;
-    @Column(nullable = false,length = 225)
+    @Column(nullable = false)
     private String methodologie;
     //private LocalDate date;
     private Date date;
 
 
 
-    @OneToOne
+    @OneToOne()
     private Probleme problemes;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "solution")
+    @OneToMany(mappedBy = "solution",cascade = CascadeType.ALL)
     // Changement en arraylist pour gérer le cas où il n'y aurait pas de commentaires
             // s'il y'a une liste vide, pour éviter null
     List<Commentaire> commentaires = new ArrayList<>();

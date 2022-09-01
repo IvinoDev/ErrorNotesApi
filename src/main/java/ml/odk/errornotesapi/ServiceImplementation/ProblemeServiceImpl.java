@@ -79,7 +79,7 @@ public class ProblemeServiceImpl implements ProblemeService {
     @Override
     public String supprimer(Long id_probleme) {
         pr.deleteById(id_probleme);
-        return "Problème Supprimé avec succès";
+        return "Problème supprimé avec succès";
     }
 
     @Override

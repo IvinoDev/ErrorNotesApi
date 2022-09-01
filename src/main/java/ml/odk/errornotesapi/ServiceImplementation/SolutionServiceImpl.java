@@ -71,11 +71,12 @@ public class SolutionServiceImpl implements SolutionService {
         //Changement de l'état du pb en résolu lors qd la solution est créee
         //récup du pb puis changement de son état
         probleme.setEtat(Etat.resolu);
+
         //Ancienne méthode: solution.getProblemes().setEtat(Etat.resolu);
         //Sauvegarde du pb avec le nouvel Etat
-        pr.save(probleme);
+        //pr.save(probleme);
         //Assigner le pb récupéré ou lier ce pb à la solution qui va être postée
-        solution.setProblemes(probleme);
+        //solution.setProblemes(probleme);
         //Ajout de la date à laquelle la solution a été postée
         solution.setDate(new Date());
         //solution.setDate(LocalDate.now());
@@ -150,6 +151,10 @@ public class SolutionServiceImpl implements SolutionService {
         //difference.toString();
         //solution.setEstimation("" + difference);
         //sauvegarde de la solution
-        return sr.save(solution);
+        solution.setProblemes(probleme);
+        Solution s=sr.save(solution);
+        probleme.setSolution(s);
+        pr.save(probleme);
+        return s;
     }
 }

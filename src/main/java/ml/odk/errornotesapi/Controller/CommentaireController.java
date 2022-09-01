@@ -23,6 +23,7 @@ public class CommentaireController {
     }*/
     @ApiOperation(value = " Methode pour creer un  commentaire")
 
+    //id probleme dabr puis du compte dans postman
     @PostMapping("/ajouter/{id_compte}/{id_solution}")
     Commentaire ajouter(@RequestBody Commentaire commentaire, @PathVariable Long id_compte, @PathVariable Long id_solution){
         return cs.addcommentaire(commentaire, id_compte, id_solution);

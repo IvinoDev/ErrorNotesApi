@@ -25,7 +25,7 @@ public class Compte {
     private String email;
     @Column(unique = true, nullable = false)
     private String password;
-    @Column(name = "profile",length = 25)
+    @Column(name = "profile")
     @Enumerated(EnumType.STRING)
     private Type type;
 

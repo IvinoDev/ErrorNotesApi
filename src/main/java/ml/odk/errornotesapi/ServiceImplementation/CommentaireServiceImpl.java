@@ -67,6 +67,7 @@ public class CommentaireServiceImpl implements CommentaireService {
         commentaire.setCompte(compte);
         commentaire.setDate(LocalDate.now());
         commentaire.setHeure(LocalTime.now());
+        commentaire.setSolution(solution);
         //Sauvegarde du commentaire
         cr.save(commentaire);
         // Créer une liste de commentaire qui sera égale des commentaires déjà postés pour la solution

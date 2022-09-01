@@ -22,7 +22,7 @@ public class Commentaire {
     private LocalTime heure;
 
     // Ancienne disposition au 29
-    @JsonIgnore //Ajouté le 31
+    //@JsonIgnore //Ajouté le 31
     @ManyToOne
     @JoinColumn(name = "id_solution")
     private Solution solution;
