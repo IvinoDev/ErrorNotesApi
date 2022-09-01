@@ -99,11 +99,15 @@ public class CompteServiceImpl implements CompteService {
 
     //Ancien deletepb
     @Override
-    public String supprimer(Long id) {
-        cr.deleteById(id);
-        return "Compte supprimé avec succès";
+    public String supprimer(Long id_compte, Long id_compteauth) {
+        Compte compteauth = cr.findById(id_compte).get();
+        if (compteauth.getType() == Type.Super || compteauth.getType() == Type.UserAdmin) {
+            cr.deleteById(id_compte);
+            return "Compte supprimé avec succès";
+        } else {
+            return "Vous n'avez pas le droit d'effectuer cette action";
+        }
     }
-
     //nv delete pb
    /* @Override
     public String supprimer(Long id, Compte compte) {

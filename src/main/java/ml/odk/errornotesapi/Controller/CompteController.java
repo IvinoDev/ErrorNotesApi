@@ -82,11 +82,11 @@ public class CompteController {
         return "Action impossible";*/
     }
     //Verification de l'identité de l'user pour effectuer la suppression
-    @DeleteMapping("/supprimer/{id}")
-    public String supprimer (@PathVariable Long id) {
+    @DeleteMapping("/supprimer/{id_compte}/{id_compteauth}")
+    public String supprimer (@PathVariable Long id_compte, @PathVariable Long id_compteauth) {
         /*Compte compt = new Compte();
         if (compt.getType() == Type.UserAdmin){*/
-            return cs.supprimer(id);
+            return cs.supprimer(id_compte, id_compteauth);
         /*}
        return "Action impossible";*/
     }

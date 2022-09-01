@@ -8,6 +8,9 @@ import ml.odk.errornotesapi.Model.Solution;
 import ml.odk.errornotesapi.Service.CommentaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @Api(value = "Gestion de commentaire")
 @RestController
 @Data
@@ -38,4 +41,11 @@ public class CommentaireController {
     String supprimer(@PathVariable Long id_Commentaire){
         return cs.supprimer(id_Commentaire);
     }
+
+    @ApiOperation(value = " Methode pour afficher la liste des commentaires")
+    @GetMapping("/liste")
+    public List<Commentaire> lister() {
+        return cs.lire();
+    }
+
 }

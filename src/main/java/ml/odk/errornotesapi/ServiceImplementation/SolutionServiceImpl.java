@@ -127,11 +127,11 @@ public class SolutionServiceImpl implements SolutionService {
            long dateheure = (date.getTime() - datepb.getTime()) / heure;
            long dateminute = (date.getTime() - datepb.getTime()) / (heure / 60);
            //Pour vérifier au niveau de la console
-           System.err.println(l);
+           /*System.err.println(l);
            System.err.println(dateminute);
            System.err.println(minute);
            System.err.println(annee);
-           System.err.println(date.getTime());
+           System.err.println(date.getTime());*/
            System.err.println(datepb.getTime());
 
 
@@ -179,5 +179,5 @@ public class SolutionServiceImpl implements SolutionService {
             return null;
         }
 
-}
+    }
 }
