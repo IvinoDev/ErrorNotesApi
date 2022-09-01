@@ -13,19 +13,19 @@ public class SolutionController {
     @Autowired
     SolutionService solutionService;
 
-    @PostMapping("/ajouter/{id_probleme}")
-    Object ajouter(@RequestBody Solution solution, @PathVariable Long id_probleme){
+    @PostMapping("/ajouter/{id_probleme}/{id_compte}")
+    Object ajouter(@RequestBody Solution solution, @PathVariable Long id_probleme, @PathVariable Long id_compte){
         Solution s=solutionService.verification(id_probleme);
         if (s != null) {
             return "Solution déjà existante";
         } else {
-            return solutionService.addsolution(solution, id_probleme);
+            return solutionService.addsolution(solution, id_probleme, id_compte);
         }
     }
 
-    @PutMapping("/modifier/{id_solution}")
-    Solution modifier(@PathVariable Long id_solution, @RequestBody Solution solution){
-        return solutionService.modifiersolution(id_solution, solution);
+    @PutMapping("/modifier/{id_solution}/{id_compte}")
+    Solution modifier(@PathVariable Long id_solution, @PathVariable Long id_compte,  @RequestBody Solution solution){
+        return solutionService.modifiersolution(id_solution, id_compte, solution);
     }
 
     @DeleteMapping("/supprimer/{id_solution}")

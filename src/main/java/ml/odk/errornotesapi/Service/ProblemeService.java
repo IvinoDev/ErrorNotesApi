@@ -11,7 +11,7 @@ public interface ProblemeService {
     //Probleme creerprobleme(Probleme probleme);
     //modification des informations d'un problème
 
-    Probleme modifier(Long id_probleme, Probleme probleme);
+    Probleme modifier(Long id_probleme, Long id_compte, Probleme probleme);
 
     // Afficher la liste des problèmes
     List<Probleme> lire();

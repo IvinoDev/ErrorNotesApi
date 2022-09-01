@@ -52,9 +52,9 @@ public class ProblemeController {
 //        return "Action non autorisée.";
 //    }
     //MODIFIER LE PB
-    @PutMapping("/modifier/{id_probleme}")
-    Probleme modifier (@RequestBody Probleme probleme, @PathVariable Long id_probleme){
-        return ps.modifier(id_probleme, probleme);
+    @PutMapping("/modifier/{id_probleme}/{id_compte}")
+    Probleme modifier (@RequestBody Probleme probleme, @PathVariable Long id_probleme, @PathVariable Long id_compte){
+        return ps.modifier(id_probleme, id_compte, probleme);
     }
 
     //Modifier manuellement l'état d'un pb existant:
