@@ -6,6 +6,8 @@ import ml.odk.errornotesapi.Service.SolutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Data
 @RequestMapping("/solution" )
@@ -21,6 +23,10 @@ public class SolutionController {
         } else {
             return solutionService.addsolution(solution, id_probleme, id_compte);
         }
+    }
+    // Afficher la liste des solutions
+    @GetMapping("/liresolution")
+    public List<Solution> lire(){return solutionService.liresolution();
     }
 
     @PutMapping("/modifier/{id_solution}/{id_compte}")

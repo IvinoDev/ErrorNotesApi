@@ -26,6 +26,10 @@ public class ProblemeController {
     Probleme ajouter(@RequestBody Probleme probleme, @PathVariable Long id_compte) {
         return ps.addproblem(probleme, id_compte);
     }
+    // Afficher la liste des problèmes
+    @GetMapping("/lire")
+    public List<Probleme>lireprobleme(){return ps.lire();
+    }
 
     /*@PostMapping("/poster")
     String ajouter(@RequestBody Probleme probleme){
