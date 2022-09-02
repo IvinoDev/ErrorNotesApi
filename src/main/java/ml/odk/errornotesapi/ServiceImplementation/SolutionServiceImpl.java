@@ -43,7 +43,7 @@ public class SolutionServiceImpl implements SolutionService {
                 return sr.findById(id)
                         .map(s -> {
                             s.setDescription(solution.getDescription());
-                            s.setEstimation(solution.getEstimation());
+                            //s.setEstimation(solution.getEstimation());
                             s.setRessource(solution.getRessource());
                             s.setMethodologie(solution.getMethodologie());
                             return sr.save(s);

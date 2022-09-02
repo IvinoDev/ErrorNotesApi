@@ -27,7 +27,7 @@ public class ErrorNotesApiApplication implements CommandLineRunner {
 
         Compte superAdmin = new Compte();
         superAdmin.setId_compte(1L);
-        superAdmin.setNom("KALOGA");
+        superAdmin.setNom("Kaloga");
         superAdmin.setPrenom("Fatoumata");
         superAdmin.setPhone("+33417895467");
         superAdmin.setEmail("fkaloga@gmail.com");

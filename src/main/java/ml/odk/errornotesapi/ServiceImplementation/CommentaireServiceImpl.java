@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 @Service
 @Data
@@ -51,7 +52,7 @@ public class CommentaireServiceImpl implements CommentaireService {
             return cr.findById(id_commentaire)
                     .map(c1 -> {
                         c1.setMessage(commentaire.getMessage());
-                        c1.setDate(commentaire.getDate());
+                        c1.setDate(LocalDate.now());
                         return cr.save(c1);
                     }).orElseThrow(() -> new RuntimeException("Modification impossible"));
         }else {
