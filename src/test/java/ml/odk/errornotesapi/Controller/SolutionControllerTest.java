@@ -1,6 +1,7 @@
 package ml.odk.errornotesapi.Controller;
 
 import ml.odk.errornotesapi.Model.Commentaire;
+import ml.odk.errornotesapi.Model.Probleme;
 import ml.odk.errornotesapi.Model.Solution;
 import ml.odk.errornotesapi.Repository.SolutionRepository;
 import ml.odk.errornotesapi.Service.SolutionService;
@@ -44,6 +45,12 @@ public class SolutionControllerTest {
         s.setEstimation("45 minute");
         sr.save(s);
         assertNotNull(sr.findById(2L).get());
+
+    }
+    @Test
+    void lister(){
+       Solution  solution1 =new Solution();
+        sr.findAll();
 
     }
     @Test

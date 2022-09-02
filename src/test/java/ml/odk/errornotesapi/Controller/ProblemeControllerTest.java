@@ -55,6 +55,12 @@ class ProblemeControllerTest {
 
     }
     @Test
+    void lister(){
+        Probleme probleme =new Probleme();
+        pr.findAll();
+
+    }
+    @Test
     void supprimer(){
         Probleme p = new Probleme();
         p.setId(1L);
