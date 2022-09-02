@@ -41,6 +41,32 @@ class ProblemeControllerTest {
         pr.save(p);
         assertNotNull(pr.findById(1L).get());
     }
+    @Test
+    void modifier(){
+        Probleme p = new Probleme();
+        p.setId(1L);
+        p.setTitre("Test unitaire en Spring Boot");
+        p.setDescription("C'est super de voyage dans le monde du numérique");
+        p.setTechnologie("Spring Boot comme chauffeur");
+        p.setEtat(Etat.resolu);
+        p.setDate(new Date());
+        pr.save(p);
+        assertNotNull(pr.findById(1L).get());
+
+    }
+    @Test
+    void supprimer(){
+        Probleme p = new Probleme();
+        p.setId(1L);
+        p.setTitre("Test unitaire en Spring Boot");
+        p.setDescription("C'est super de voyage dans le monde du numérique");
+        p.setTechnologie("Spring Boot comme chauffeur");
+        p.setEtat(Etat.initie);
+        p.setDate(new Date());
+        Probleme probleme = pr.save(p);
+       pr.deleteById(probleme.getCompte().getId_compte());
+
+    }
 
 
 }
