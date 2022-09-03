@@ -33,11 +33,14 @@ public class Probleme {
     @OneToOne(cascade = CascadeType.ALL)
     private Solution solution;
 
+    @ManyToOne
+    private Compte compte;
+
+
 
     /*@JsonIgnore
     @OneToOne
     private Solution solution;*/
 
-    @ManyToOne
-    private Compte compte;
+
 }

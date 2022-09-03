@@ -13,5 +13,6 @@ public interface CompteRepository extends JpaRepository<Compte, Long> {
     //fonction pour retrouver un compte via son email
     public Compte findByEmail(String email);
 
+    //Pour retrouver un compte via son email et son mdp
     public Compte findByEmailAndPassword(String email, String password);
 }

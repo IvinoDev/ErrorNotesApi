@@ -12,14 +12,18 @@ import java.util.Optional;
 public interface ProblemeRepository extends JpaRepository<Probleme,Long> {
 
     //Requête pour récuperer tous les problèmes contenu dans la table Probleme
-    //Puis les filtrer en fonction d'un mot clé (là où il y'a LIKE puis les signes
+    /*
+    Puis les filtrer en fonction d'un mot clé (là où il y'a l'opérateur SQL "LIKE" et les Jokers (%) qui délimitent
+    la portée de la recherche
+    */
     @Modifying
     @Query(value = "SELECT * FROM probleme WHERE probleme.titre LIKE %?1%" +
             " OR probleme.description LIKE %?1%" +
             " OR probleme.technologie LIKE %?1%", nativeQuery = true)
 
+    //Stockage du résultat dans une liste
     List<Probleme> findAll(String mot_cle);
-    //Optional<Probleme> findById(Long id);
+
 
     //Verification de l'existance d'un problème à travers le titre
     Optional<Probleme> findByTitre(String titre);

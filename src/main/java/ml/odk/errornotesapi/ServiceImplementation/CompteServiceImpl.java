@@ -16,23 +16,17 @@ import java.util.List;
 @Service
 @Data
 public class CompteServiceImpl implements CompteService {
+
+    //Injection du Repository du compte sous le short name "cr" en vue d'utiliser ses méthodes
     @Autowired
     CompteRepository cr;
 
-    @Override
-    public Compte connecter(Compte compte) {
-        return null;
-    }
-
-    @Override
-    public Compte deconnecter(Compte compte) {
-        return null;
-    }
-
+    //Appel de la méthode d'encryptage de mot de passe de Spring Security Crypto
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    //Création d'un compte User simple
     @Override
     public Compte creeruser(Compte compte) {
         //fonction pour préciser que les personnes qui s'incrivent sont des users
@@ -42,6 +36,8 @@ public class CompteServiceImpl implements CompteService {
         return cr.save(compte);
     }
 
+
+    //Création d'un compte Admin (reservée au SuperAdmin)
     @Override
     public Compte creerAdmin(Compte compte, Long id) {
         //pour tout d'abord récupérer le compte qui crée l'admin via son id
@@ -58,6 +54,8 @@ public class CompteServiceImpl implements CompteService {
         }
     }
 
+
+    //Modification d'un compte avec vérification
     @Override
     public Compte modifier(Long id, Compte compte) {
         Compte compteauth = cr.findById(id).get();
@@ -68,7 +66,7 @@ public class CompteServiceImpl implements CompteService {
                         c.setPrenom(compte.getPrenom());
                         c.setEmail(compte.getEmail());
                         c.setPhone(compte.getPhone());
-                        //Plus necessaire car automatique
+                        //Plus necessaire car automatique à la création du compte User
                         //c.setType(compte.getType());
                         return cr.save(c);
                     }).orElseThrow(() -> new RuntimeException("Modification interdite"));
@@ -79,25 +77,7 @@ public class CompteServiceImpl implements CompteService {
     }
 
 
-    @Override
-    public List<Compte> lire(Long id) {
-        Compte compteafficher = cr.findById(id).get();
-        if (compteafficher.getType() == Type.Super || compteafficher.getType() == Type.UserAdmin) {
-            return cr.findAll();
-        }
-        return null;
-
-    }
-
-
-
-    /*@Override
-    public Compte rechercher(Compte compte) {
-
-    }*/
-
-
-    //Ancien deletepb
+    //Nouvelle méthode de suppression qui prend en compte des vérifications
     @Override
     public String supprimer(Long id_compte, Long id_compteauth) {
         Compte compteauth = cr.findById(id_compte).get();
@@ -108,22 +88,16 @@ public class CompteServiceImpl implements CompteService {
             return "Vous n'avez pas le droit d'effectuer cette action";
         }
     }
-    //nv delete pb
-   /* @Override
-    public String supprimer(Long id, Compte compte) {
 
-        if (compte.getType() == Type.Super || compte.getType() == Type.UserAdmin) {
-            cr.deleteById(id);
-            return "Compte supprimé avec succès";
-        } else {
-            return "Vous n'avez pas ce droit";
-        }
-    } */
+
+    //Pour obtenir / rechercher un compte uniquement via son mail
     @Override
     public Compte getCompteByEmail(String email) {
         return cr.findByEmail(email);
     }
 
+
+    //Pour obtenir / rechercher un compte via son mail et son mdp, utillisée surtout pour notre SuperAdmin et le login
     @Override
     public Compte getCompteByEmailAndPassword(String email, String password) {
         Compte compte = cr.findByEmail(email);
@@ -134,4 +108,49 @@ public class CompteServiceImpl implements CompteService {
         }
         return null;
     }
+
+
+
+    //ANCIENNE METHODE PAS IMPLEMENTEE
+    /* @Override
+    public Compte connecter(Compte compte) {
+        return null;
+    }
+
+
+    @Override
+    public Compte deconnecter(Compte compte) {
+        return null;
+    } */
+
+
+    //METHODE DE SUPPRESSION OBSELETE
+   /* @Override
+    public String supprimer(Long id, Compte compte) {
+
+        if (compte.getType() == Type.Super || compte.getType() == Type.UserAdmin) {
+            cr.deleteById(id);
+            return "Compte supprimé avec succès";
+        } else {
+            return "Vous n'avez pas ce droit";
+        }
+    } */
+
+
+      /*@Override
+    public List<Compte> lire(Long id) {
+        Compte compteafficher = cr.findById(id).get();
+        if (compteafficher.getType() == Type.Super || compteafficher.getType() == Type.UserAdmin) {
+            return cr.findAll();
+        }
+        return null;
+
+    }*/
+
+
+    /*@Override
+    public Compte rechercher(Compte compte) {
+
+    }*/
+
 }

@@ -12,9 +12,13 @@ import java.util.List;
 @Data
 @RequestMapping("/solution" )
 public class SolutionController {
+
+    //Injection du Service des Solutions sous le nom de "solutionService" pour pouvoir utiliser les méthodes définies dedans
     @Autowired
     SolutionService solutionService;
 
+
+    //Pour ajouter une solution
     @PostMapping("/ajouter/{id_probleme}/{id_compte}")
     Object ajouter(@RequestBody Solution solution, @PathVariable Long id_probleme, @PathVariable Long id_compte){
         Solution s=solutionService.verification(id_probleme);
@@ -24,18 +28,25 @@ public class SolutionController {
             return solutionService.addsolution(solution, id_probleme, id_compte);
         }
     }
+
+
     // Afficher la liste des solutions
     @GetMapping("/liresolution")
     public List<Solution> lire(){return solutionService.liresolution();
     }
 
+
+    //Pour modifer une solution
     @PutMapping("/modifier/{id_solution}/{id_compte}")
     Solution modifier(@PathVariable Long id_solution, @PathVariable Long id_compte,  @RequestBody Solution solution){
         return solutionService.modifiersolution(id_solution, id_compte, solution);
     }
 
+
+    //Pour supprimer une solution
     @DeleteMapping("/supprimer/{id_solution}")
     String supprimer(@PathVariable Long id_solution){
         return solutionService.supprimersolution(id_solution);
     }
+
 }

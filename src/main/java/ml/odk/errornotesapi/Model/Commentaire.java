@@ -27,14 +27,17 @@ public class Commentaire {
     @JoinColumn(name = "id_solution")
     private Solution solution;
 
+    @ManyToOne
+    @JoinColumn(name = "id_compte")
+    private Compte compte;
+
+
     /*@ManyToOne
     private Compte compte;*/
 
     //Disposition du 30
     /*@OneToOne
     private Compte compte; */
-    @ManyToOne
-    @JoinColumn(name = "id_compte")
-    private Compte compte;
+
 
 }

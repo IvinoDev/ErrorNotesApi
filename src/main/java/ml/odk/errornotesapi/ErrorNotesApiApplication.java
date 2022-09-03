@@ -22,11 +22,11 @@ public class ErrorNotesApiApplication implements CommandLineRunner {
     }
 
     public void run(String... args) throws Exception {
-        //Compte compte = compteRepository.findByEmailAndPassword("fkaloga@gmail.com", "Kaloga123");
-        //if (compte == null) {
+        Compte compte = compteRepository.findByEmailAndPassword("fkaloga@gmail.com", "Kaloga123");
+        if (compte == null) {
 
         Compte superAdmin = new Compte();
-        superAdmin.setId_compte(1L);
+        //superAdmin.setId_compte(1L);
         superAdmin.setNom("Kaloga");
         superAdmin.setPrenom("Fatoumata");
         superAdmin.setPhone("+33417895467");
@@ -34,7 +34,7 @@ public class ErrorNotesApiApplication implements CommandLineRunner {
         superAdmin.setPassword(compteService.passwordEncoder().encode("Kaloga123"));
         superAdmin.setType(Type.Super);
         compteRepository.save(superAdmin);
-        //}
+        }
         System.out.println("creation Super OK");
 
 

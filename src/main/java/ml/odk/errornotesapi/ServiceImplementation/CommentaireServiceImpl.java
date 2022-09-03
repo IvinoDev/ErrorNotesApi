@@ -21,6 +21,8 @@ import java.util.List;
 @Service
 @Data
 public class CommentaireServiceImpl implements CommentaireService {
+
+    //Injection des différents Repository qui contiennent les méthodes dont on a besoin
     //cr est le sigle de commentairerepository
     private final CommentaireRepository cr;
 
@@ -33,42 +35,8 @@ public class CommentaireServiceImpl implements CommentaireService {
     @Autowired
     ProblemeRepository problemeRepository;
 
-    @Override
-    public Commentaire creercommentaire(Commentaire commentaire) {
-        return null;
-    }
 
-    /*@Override
-    public Commentaire modifier(Commentaire commentaire) {
-        return cr.save(commentaire);
-    }*/
-
-    @Override
-    public Commentaire modifier(Long id_commentaire,Long id_compte, Commentaire commentaire) {
-       try {
-           Compte user =compteRepository.findById(id_compte).get();
-           Commentaire commentaire1= cr.findById(id_commentaire).get();
-        if (user == commentaire1.getCompte()) {
-            return cr.findById(id_commentaire)
-                    .map(c1 -> {
-                        c1.setMessage(commentaire.getMessage());
-                        c1.setDate(LocalDate.now());
-                        return cr.save(c1);
-                    }).orElseThrow(() -> new RuntimeException("Modification impossible"));
-        }else {
-            return  null;
-        }
-    }catch (Exception e){
-           return null;
-       }
-    }
-
-
-    @Override
-    public List<Commentaire> lire() {
-        return cr.findAll();
-    }
-
+    //Pour la création d'un commentaire
     @Override
     public Commentaire addcommentaire(Commentaire commentaire, Long id_solution, Long id_compte) {
         //Récupération du compte de la solution avec leurs Id(s)
@@ -96,6 +64,37 @@ public class CommentaireServiceImpl implements CommentaireService {
         return commentaire;
     }
 
+
+    //Pour la modification d'un commentaire
+    @Override
+    public Commentaire modifier(Long id_commentaire,Long id_compte, Commentaire commentaire) {
+       try {
+           Compte user =compteRepository.findById(id_compte).get();
+           Commentaire commentaire1= cr.findById(id_commentaire).get();
+        if (user == commentaire1.getCompte()) {
+            return cr.findById(id_commentaire)
+                    .map(c1 -> {
+                        c1.setMessage(commentaire.getMessage());
+                        c1.setDate(LocalDate.now());
+                        return cr.save(c1);
+                    }).orElseThrow(() -> new RuntimeException("Modification impossible"));
+        }else {
+            return  null;
+        }
+    }catch (Exception e){
+           return null;
+       }
+    }
+
+
+    //Pour afficher la liste des commentaires
+    @Override
+    public List<Commentaire> lire() {
+        return cr.findAll();
+    }
+
+
+    //Pour la suppression d'un commentaire
     @Override
     public String supprimer(Long id_commentaire) {
         cr.deleteById(id_commentaire);

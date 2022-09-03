@@ -18,6 +18,8 @@ import javax.servlet.http.HttpSession;
 @Data
 @RequestMapping("/utilisateur")
 public class CompteController {
+
+    //Injection du Service du Compte sous le short name "cs" pour pouvoir utiliser les méthodes définies dedans
     @Autowired
     CompteService cs;
 
@@ -61,18 +63,21 @@ public class CompteController {
         return "Déconnexion avec succès";
     }
 
+
+    //Création User simple
     @PostMapping("/creerUser")
     public Compte creer (@RequestBody Compte compte) {
         return cs.creeruser(compte);
     }
 
-    //Pour créer un admin (méthode reservée au superAdmin
+
+    //Pour créer un admin (méthode reservée au superAdmin)
     @PostMapping("/creerAdmin/{id}")
     public Compte creerAdmin (@RequestBody Compte compte, @PathVariable Long id) {
         return cs.creerAdmin(compte, id);
     }
 
-
+    //Pour modifier un user
     @PutMapping("/modifier/{id}")
     public Object modifier (@RequestBody Compte compte, @PathVariable(value = "id") Long id) {
         /*Compte compt = new Compte();
@@ -81,6 +86,8 @@ public class CompteController {
         /*}
         return "Action impossible";*/
     }
+
+
     //Verification de l'identité de l'user pour effectuer la suppression
     @DeleteMapping("/supprimer/{id_compte}/{id_compteauth}")
     public String supprimer (@PathVariable Long id_compte, @PathVariable Long id_compteauth) {

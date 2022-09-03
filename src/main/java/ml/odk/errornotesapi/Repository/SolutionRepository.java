@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SolutionRepository extends JpaRepository<Solution,Long> {
+
+    //Méthode qui sert dans le cadre de la vérification de l'existance d'une solution pour un pb (voir le service)
     Solution findByProblemes(Probleme probleme);
 }

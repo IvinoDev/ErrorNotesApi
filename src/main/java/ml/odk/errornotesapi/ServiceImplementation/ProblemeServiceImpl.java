@@ -23,26 +23,26 @@ public class ProblemeServiceImpl implements ProblemeService {
     // pr est le sigle de problemerepository
     @Autowired
     CompteRepository cr;
-    //mieux de faire autowired ici
-    private final ProblemeRepository pr;
-    /*@Override
-    public Probleme creerprobleme(Probleme probleme) {
-        return pr.save(probleme);
-    }*/
 
+    //mieux de faire un autowired ici pour l'injection de ce repository
+    private final ProblemeRepository pr;
+
+
+    //Méthode pour créer un problème
     @Override
-    public String creerprobleme(Probleme probleme) {
-        Optional<Probleme> problemeOptional=pr.findByTitre(probleme.getTitre());
-        if(problemeOptional.isPresent()){
-            return "Le problème existe déjà";
-        }
-        probleme = this.pr.save(probleme);
+    public Probleme addproblem(Probleme probleme, Long id) {
+        //Permet de recupérer l'id de la personne connectée et de la retourner (sur le GUI / l'interface)
+        Compte compte = cr.findById(id).get();
+        //Pour que l'utilsateur présentement connecté crée le problème
+        probleme.setCompte(compte);
+        //Pour enregistrer la date à laquelle le problème a été crée
+        probleme.setDate(new Date());
+        //pour que l'état soit initial à la création du pb
         probleme.setEtat(Etat.initie);
-        this.pr.save(probleme);
-        return "Problème crée avec succés.";
+        return pr.save(probleme);
     }
 
-    // Modification du problème par l'id du compte
+    //Modification d'un problème via l'id du compte
     @Override
     public Probleme modifier(Long id_probleme, Long id_compte, Probleme probleme) {
         try {
@@ -61,27 +61,20 @@ public class ProblemeServiceImpl implements ProblemeService {
             }else {
                 return  null;
             }
-
         }catch (Exception e){
             return  null;
         }
-
-        //ancien
-        /*return pr.findById(id)
-                .map(p->{
-            p.setDescription(probleme.getDescription());
-            p.setTitre(probleme.getTitre());
-            p.setTechnologie(probleme.getTechnologie());
-            return pr.save(p);
-
-        }).orElseThrow(() -> new RuntimeException("Désole, Probleme non trouvé"));*/
     }
 
+
+    //Pour l'affichage de la liste des problèmes
     @Override
     public List<Probleme> lire() {
         return pr.findAll();
     }
-    //  la méthode pour effectuer une recherche par mot de clé
+
+
+    //  la méthode pour rechercher un problème par mot de clé
     @Override
     public List<Probleme> recherche(String mot_cle) {
         List<Probleme> resultat = pr.findAll(mot_cle);
@@ -94,11 +87,10 @@ public class ProblemeServiceImpl implements ProblemeService {
             }
         }
         return resultat;
-
     }
 
 
-
+    //Suppression d'un problème
     @Override
     public String supprimer(Long id_probleme, Long id_compte) {
         Compte user =cr.findById(id_compte).get();
@@ -117,6 +109,7 @@ public class ProblemeServiceImpl implements ProblemeService {
     }
 
 
+    // Modification manuelle de l'état d'un problème
     @Override
     public Probleme modifierEtat(Long id_probleme, Probleme probleme) {
         Probleme proo = new Probleme();
@@ -128,19 +121,18 @@ public class ProblemeServiceImpl implements ProblemeService {
 
     }
 
-    //Méthode A
-    @Override
-    public Probleme addproblem(Probleme probleme, Long id) {
-        //Permet de recupérer l'id de la personne connectée et de la retourner (sur le GUI / interface)
-        Compte compte = cr.findById(id).get();
-        //Pour que l'utilsateur présentement connecté crée le problème
-        probleme.setCompte(compte);
-        //Pour enregistrer la date à laquelle le problème a été crée
-        probleme.setDate(new Date());
-        //pour que l'état soit initial à la création du pb
-        probleme.setEtat(Etat.initie);
-        return pr.save(probleme);
-    }
 
+    //Méthode obselète pour la création d'un problème
+    /*@Override
+    public String creerprobleme(Probleme probleme) {
+        Optional<Probleme> problemeOptional=pr.findByTitre(probleme.getTitre());
+        if(problemeOptional.isPresent()){
+            return "Le problème existe déjà";
+        }
+        probleme = this.pr.save(probleme);
+        probleme.setEtat(Etat.initie);
+        this.pr.save(probleme);
+        return "Problème crée avec succés.";
+    }*/
 
 }

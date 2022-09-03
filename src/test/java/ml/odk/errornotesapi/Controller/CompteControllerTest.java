@@ -86,27 +86,4 @@ class CompteControllerTest {
 
     }
 
-    @Test
-    void getCs() {
-    }
-
-    @Test
-    void setCs() {
-    }
-
-    @Test
-    void testEquals() {
-    }
-
-    @Test
-    void canEqual() {
-    }
-
-    @Test
-    void testHashCode() {
-    }
-
-    @Test
-    void testToString() {
-    }
 }
