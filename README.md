@@ -1,6 +1,6 @@
 ## Introduction à ErrorNotes
 
-Lors de la réalisation d’un logiciel, les développeurs se retrouve toujours confrontés à différents problèmes techniques pouvant couvrir une part considérable du temps de développement.
+Lors de la réalisation d’un logiciel, les développeurs se retrouvent toujours confrontés à différents problèmes techniques pouvant couvrir une part considérable du temps de développement.
 
 ErrorNotes entend rendre la recherche de solution à ces problèmes beaucoup plus rapide et efficace en offrant une plateforme d’échange où un chacun pourra garder des informations sur les problèmes qu'il a eu à rencontrer et les solutions trouvées pour y remédier.
 
