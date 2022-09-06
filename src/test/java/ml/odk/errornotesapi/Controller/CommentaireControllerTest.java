@@ -3,9 +3,12 @@ package ml.odk.errornotesapi.Controller;
 import ml.odk.errornotesapi.Model.Commentaire;
 import ml.odk.errornotesapi.Repository.CommentaireRepository;
 import ml.odk.errornotesapi.Repository.CompteRepository;
+import ml.odk.errornotesapi.Service.CommentaireService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,35 +16,36 @@ import static org.junit.jupiter.api.Assertions.*;
 class CommentaireControllerTest {
 
     @Autowired
-    CommentaireRepository commentaireRepository;
+    CommentaireService commentaireService;
 
     @Test
     void ajouter() {
         Commentaire commentaire = new Commentaire();
+        commentaire.setId_commentaire(1L);
         commentaire.setMessage("Jean n'est pas gentil");
-        commentaireRepository.save(commentaire);
+        commentaireService.addcommentaire(commentaire, 1L, 2L);
     }
 
 
     @Test
     void modifier() {
         Commentaire commentaire = new Commentaire();
+        commentaire.getId_commentaire();
         commentaire.setMessage("Jean est sympathique");
-        commentaireRepository.save(commentaire);
+        commentaireService.modifier(1L, 2L, commentaire);
     }
 
     @Test
     void supprimer() {
         Commentaire test = new Commentaire();
-        test.setId_commentaire(3L);
         test.setMessage("juste pour le test");
-        Commentaire commentaireSave = commentaireRepository.save(test);
-        commentaireRepository.deleteById(commentaireSave.getId_commentaire());
+        commentaireService.addcommentaire(test, 2L, 3L);
+        commentaireService.supprimer(1L);
     }
 
     @Test
+
     void lister() {
-        Commentaire testliste = new Commentaire();
-        commentaireRepository.findAll();
+        List list= commentaireService.lire();
     }
 }

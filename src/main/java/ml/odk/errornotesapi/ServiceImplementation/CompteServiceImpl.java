@@ -118,6 +118,7 @@ public class CompteServiceImpl implements CompteService {
     }
 
 
+    //Ajouter l'id, le mail et le mdp pour l'authentification avant d'effectuer cette action
     @Override
     public Compte deconnecter(Compte compte) {
         return null;
